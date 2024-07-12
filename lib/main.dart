@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/general_information.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +28,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController _incidentController = TextEditingController();
+  bool _isValid = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _incidentController.addListener(_validateInput);
+  }
+
+  void _validateInput() {
+    setState(() {
+      _isValid = _incidentController.text.isNotEmpty;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          double containerWidth = constraints.maxWidth * 0.4;
+          double containerWidth = constraints.maxWidth * 0.5;
 
           if (constraints.maxWidth < 600) {
             containerWidth =
@@ -116,16 +132,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.3,
+                        width: MediaQuery.of(context).size.width * 0.5,
                         child: const Text(
                           'Please enter the incident number you received from York Regional Police. If you do not have an incident number please call the non-emergency line at XXX-XXX-XXXX.',
                           style: TextStyle(
                             fontFamily: 'ArchivoNarrow',
-                            fontWeight: FontWeight.bold,
+                            //fontWeight: FontWeight.bold,
                             fontSize: 16.0,
                           ),
                         ),
@@ -141,6 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             fontFamily: 'ArchivoNarrow',
                           ),
                           child: TextFormField(
+                            controller: _incidentController,
                             style: const TextStyle(fontSize: 16.0),
                             decoration: const InputDecoration(
                               labelText: 'Incident #',
@@ -159,12 +176,20 @@ class _MyHomePageState extends State<MyHomePage> {
                           width: 150,
                           height: 40,
                           child: TextButton(
-                            onPressed: () {
-                              // Handle button press
-                            },
+                            onPressed: _isValid
+                                ? () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => NextPage(),
+                                      ),
+                                    );
+                                  }
+                                : null,
                             style: TextButton.styleFrom(
-                              backgroundColor:
-                                  const Color.fromRGBO(0, 61, 121, 1),
+                              backgroundColor: _isValid
+                                  ? const Color.fromRGBO(0, 61, 121, 1)
+                                  : Colors.grey.withOpacity(0.5),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(40.0),
                               ),
@@ -190,5 +215,11 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _incidentController.dispose();
+    super.dispose();
   }
 }
