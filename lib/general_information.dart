@@ -15,6 +15,11 @@ class _NextPageState extends State<NextPage> {
   String? _hasCompletedReport;
   String? _selectedMunicipality;
   String? _400series;
+  String? _vehiclesInvolved;
+  String? _anyInjuries;
+  String? _anyPedCycInvolved;
+  String? _leaveWithoutExchanging;
+  String? _driverInfo;
 
   @override
   void initState() {
@@ -102,7 +107,7 @@ class _NextPageState extends State<NextPage> {
               color: Color.fromRGBO(0, 61, 121, 1),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 80.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 children: [
                   SizedBox(
@@ -526,6 +531,562 @@ class _NextPageState extends State<NextPage> {
                             ),
                             const Text('No'),
                           ],
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: RichText(
+                          text: const TextSpan(
+                            style: TextStyle(
+                              fontFamily: 'ArchivoNarrow',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black, // Set default color for text
+                            ),
+                            children: [
+                              TextSpan(
+                                  text:
+                                      'Were there any injuries to anyone involved?'),
+                              TextSpan(
+                                text: ' *',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor: Colors.grey,
+                                radioTheme: RadioThemeData(
+                                  fillColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
+                                      return Color.fromRGBO(0, 61, 121, 1);
+                                    }
+                                    return Colors.grey;
+                                  }),
+                                ),
+                              ),
+                              child: Radio(
+                                value: 'Yes',
+                                groupValue: _anyInjuries,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _anyInjuries = value;
+                                    _validateInput();
+                                  });
+                                },
+                              ),
+                            ),
+                            const Text('Yes'),
+                            const SizedBox(width: 20),
+                            Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor: Colors.grey,
+                                radioTheme: RadioThemeData(
+                                  fillColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
+                                      return Color.fromRGBO(0, 61, 121, 1);
+                                    }
+                                    return Colors.grey;
+                                  }),
+                                ),
+                              ),
+                              child: Radio(
+                                value: 'No',
+                                groupValue: _anyInjuries,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _anyInjuries = value;
+                                    _validateInput();
+                                  });
+                                },
+                              ),
+                            ),
+                            const Text('No'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                              text: const TextSpan(
+                                style: TextStyle(
+                                  fontFamily: 'ArchivoNarrow',
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors
+                                      .black, // Set default color for text
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        'Did the collision involve any of the following: ',
+                                  ),
+                                  TextSpan(
+                                    text: '*',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                                height:
+                                    10), // Add extra space between the question and the list
+                            const Padding(
+                              padding: EdgeInsets.only(
+                                  left: 20.0), // Add margin to the list items
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '• Buses (School, Public, Commercial)',
+                                    style: TextStyle(
+                                      fontFamily: 'ArchivoNarrow',
+                                      fontSize: 16.0,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10), // Space between items
+                                  Text(
+                                    '• Armoured Vehicle',
+                                    style: TextStyle(
+                                      fontFamily: 'ArchivoNarrow',
+                                      fontSize: 16.0,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10), // Space between items
+                                  Text(
+                                    '• Large Commercial Vehicle',
+                                    style: TextStyle(
+                                      fontFamily: 'ArchivoNarrow',
+                                      fontSize: 16.0,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10), // Space between items
+                                  Text(
+                                    '• Vehicle Transporting Dangerous Goods',
+                                    style: TextStyle(
+                                      fontFamily: 'ArchivoNarrow',
+                                      fontSize: 16.0,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10), // Space between items
+                                  Text(
+                                    '• Any Government Vehicle (Police, Fire, Ambulance)',
+                                    style: TextStyle(
+                                      fontFamily: 'ArchivoNarrow',
+                                      fontSize: 16.0,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor: Colors.grey,
+                                radioTheme: RadioThemeData(
+                                  fillColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
+                                      return Color.fromRGBO(0, 61, 121, 1);
+                                    }
+                                    return Colors.grey;
+                                  }),
+                                ),
+                              ),
+                              child: Radio(
+                                value: 'Yes',
+                                groupValue: _vehiclesInvolved,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _vehiclesInvolved = value;
+                                    _validateInput();
+                                  });
+                                },
+                              ),
+                            ),
+                            const Text('Yes'),
+                            const SizedBox(width: 20),
+                            Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor: Colors.grey,
+                                radioTheme: RadioThemeData(
+                                  fillColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
+                                      return Color.fromRGBO(0, 61, 121, 1);
+                                    }
+                                    return Colors.grey;
+                                  }),
+                                ),
+                              ),
+                              child: Radio(
+                                value: 'No',
+                                groupValue: _vehiclesInvolved,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _vehiclesInvolved = value;
+                                    _validateInput();
+                                  });
+                                },
+                              ),
+                            ),
+                            const Text('No'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: RichText(
+                          text: const TextSpan(
+                            style: TextStyle(
+                              fontFamily: 'ArchivoNarrow',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black, // Set default color for text
+                            ),
+                            children: [
+                              TextSpan(
+                                  text:
+                                      'Were any pedestrians or cyclists involved?'),
+                              TextSpan(
+                                text: ' *',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor: Colors.grey,
+                                radioTheme: RadioThemeData(
+                                  fillColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
+                                      return Color.fromRGBO(0, 61, 121, 1);
+                                    }
+                                    return Colors.grey;
+                                  }),
+                                ),
+                              ),
+                              child: Radio(
+                                value: 'Yes',
+                                groupValue: _anyPedCycInvolved,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _anyPedCycInvolved = value;
+                                    _validateInput();
+                                  });
+                                },
+                              ),
+                            ),
+                            const Text('Yes'),
+                            const SizedBox(width: 20),
+                            Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor: Colors.grey,
+                                radioTheme: RadioThemeData(
+                                  fillColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
+                                      return Color.fromRGBO(0, 61, 121, 1);
+                                    }
+                                    return Colors.grey;
+                                  }),
+                                ),
+                              ),
+                              child: Radio(
+                                value: 'No',
+                                groupValue: _anyPedCycInvolved,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _anyPedCycInvolved = value;
+                                    _validateInput();
+                                  });
+                                },
+                              ),
+                            ),
+                            const Text('No'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: RichText(
+                          text: const TextSpan(
+                            style: TextStyle(
+                              fontFamily: 'ArchivoNarrow',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black, // Set default color for text
+                            ),
+                            children: [
+                              TextSpan(
+                                  text:
+                                      'Did any of the people involved in the collision leave without exchanging information?'),
+                              TextSpan(
+                                text: ' *',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor: Colors.grey,
+                                radioTheme: RadioThemeData(
+                                  fillColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
+                                      return Color.fromRGBO(0, 61, 121, 1);
+                                    }
+                                    return Colors.grey;
+                                  }),
+                                ),
+                              ),
+                              child: Radio(
+                                value: 'Yes',
+                                groupValue: _leaveWithoutExchanging,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _leaveWithoutExchanging = value;
+                                    _validateInput();
+                                  });
+                                },
+                              ),
+                            ),
+                            const Text('Yes'),
+                            const SizedBox(width: 20),
+                            Theme(
+                              data: ThemeData(
+                                unselectedWidgetColor: Colors.grey,
+                                radioTheme: RadioThemeData(
+                                  fillColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
+                                      return Color.fromRGBO(0, 61, 121, 1);
+                                    }
+                                    return Colors.grey;
+                                  }),
+                                ),
+                              ),
+                              child: Radio(
+                                value: 'No',
+                                groupValue: _leaveWithoutExchanging,
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    _leaveWithoutExchanging = value;
+                                    _validateInput();
+                                  });
+                                },
+                              ),
+                            ),
+                            const Text('No'),
+                          ],
+                        ),
+                      ),
+                      if (_leaveWithoutExchanging == 'Yes') ...{
+                        const SizedBox(height: 30),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                          child: RichText(
+                            text: const TextSpan(
+                              style: TextStyle(
+                                fontFamily: 'ArchivoNarrow',
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    Colors.black, // Set default color for text
+                              ),
+                              children: [
+                                TextSpan(
+                                    text:
+                                        'Do you have information about the driver who left the scene from another source (ie. Witness)?'),
+                                TextSpan(
+                                  text: ' *',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Theme(
+                                data: ThemeData(
+                                  unselectedWidgetColor: Colors.grey,
+                                  radioTheme: RadioThemeData(
+                                    fillColor:
+                                        MaterialStateProperty.resolveWith<
+                                            Color>((Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return Color.fromRGBO(0, 61, 121, 1);
+                                      }
+                                      return Colors.grey;
+                                    }),
+                                  ),
+                                ),
+                                child: Radio(
+                                  value: 'Yes',
+                                  groupValue: _driverInfo,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _driverInfo = value;
+                                      _validateInput();
+                                    });
+                                  },
+                                ),
+                              ),
+                              const Text('Yes'),
+                              const SizedBox(width: 20),
+                              Theme(
+                                data: ThemeData(
+                                  unselectedWidgetColor: Colors.grey,
+                                  radioTheme: RadioThemeData(
+                                    fillColor:
+                                        MaterialStateProperty.resolveWith<
+                                            Color>((Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return Color.fromRGBO(0, 61, 121, 1);
+                                      }
+                                      return Colors.grey;
+                                    }),
+                                  ),
+                                ),
+                                child: Radio(
+                                  value: 'No',
+                                  groupValue: _driverInfo,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _driverInfo = value;
+                                      _validateInput();
+                                    });
+                                  },
+                                ),
+                              ),
+                              const Text('No'),
+                            ],
+                          ),
+                        ),
+                      },
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: RichText(
+                          text: const TextSpan(
+                            style: TextStyle(
+                              fontFamily: 'ArchivoNarrow',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black, // Set default color for text
+                            ),
+                            children: [
+                              TextSpan(
+                                  text:
+                                      'Including your own, how many vehicles were involved in the collision?'),
+                              TextSpan(
+                                text: ' *',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          child: Theme(
+                            data: ThemeData(
+                              fontFamily: 'ArchivoNarrow',
+                            ),
+                            child: TextFormField(
+                              controller: _incidentController,
+                              style: const TextStyle(fontSize: 16.0),
+                              cursorColor: const Color.fromRGBO(0, 61, 121,
+                                  1), // Set cursor color to dark blue
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color.fromRGBO(0, 61, 121, 1),
+                                    width: 2.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 20),

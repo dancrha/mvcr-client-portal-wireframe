@@ -159,9 +159,25 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: TextFormField(
                             controller: _incidentController,
                             style: const TextStyle(fontSize: 16.0),
-                            decoration: const InputDecoration(
+                            cursorColor: Color.fromRGBO(
+                                0, 61, 121, 1), // Set cursor color to dark blue
+                            decoration: InputDecoration(
                               labelText: 'Incident #',
+                              labelStyle: TextStyle(
+                                color: Colors
+                                    .black, // Set label text color to black when not focused
+                              ),
+                              floatingLabelStyle: TextStyle(
+                                color: Color.fromRGBO(0, 61, 121,
+                                    1), // Set label text color to dark blue when focused
+                              ),
                               border: OutlineInputBorder(),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color.fromRGBO(0, 61, 121, 1),
+                                  width: 2.0,
+                                ),
+                              ),
                             ),
                           ),
                         ),
