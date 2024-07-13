@@ -29,7 +29,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _incidentController = TextEditingController();
-  bool _isValid = false;
+  bool _isValid = true;
 
   @override
   void initState() {

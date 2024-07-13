@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/collision_information.dart';
 
 class NextPage extends StatefulWidget {
   const NextPage({super.key});
@@ -11,7 +12,7 @@ class _NextPageState extends State<NextPage> {
   TextEditingController _incidentController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
   TextEditingController _timeController = TextEditingController();
-  bool _isValid = false;
+  bool _isValid = true;
   String? _hasCompletedReport;
   String? _selectedMunicipality;
   String? _400series;
@@ -31,11 +32,7 @@ class _NextPageState extends State<NextPage> {
 
   void _validateInput() {
     setState(() {
-      _isValid = _incidentController.text.isNotEmpty &&
-          _hasCompletedReport != null &&
-          _selectedMunicipality != null &&
-          _dateController.text.isNotEmpty &&
-          _timeController.text.isNotEmpty;
+      _isValid == true;
     });
   }
 
@@ -126,7 +123,7 @@ class _NextPageState extends State<NextPage> {
         body: SingleChildScrollView(
           child: LayoutBuilder(
             builder: (context, constraints) {
-              double containerWidth = constraints.maxWidth * 0.9;
+              double containerWidth = constraints.maxWidth * 0.7;
 
               if (constraints.maxWidth < 600) {
                 containerWidth = constraints
@@ -650,7 +647,7 @@ class _NextPageState extends State<NextPage> {
                             const SizedBox(
                                 height:
                                     10), // Add extra space between the question and the list
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.only(
                                   left: 20.0), // Add margin to the list items
                               child: Column(
@@ -1104,7 +1101,7 @@ class _NextPageState extends State<NextPage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const NextPage(),
+                                              const CollisionInformation(),
                                         ),
                                       );
                                     }
