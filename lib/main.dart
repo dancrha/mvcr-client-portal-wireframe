@@ -65,15 +65,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     'assets/images/logo-yrp.png',
                   ),
                 ),
-                const SizedBox(width: 20), // Adjust spacing as needed
-                Text(
-                  widget.title,
-                  style: const TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
               ],
             ),
           ),
@@ -207,7 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ? const Color.fromRGBO(0, 61, 121, 1)
                                   : Colors.grey.withOpacity(0.5),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               padding: const EdgeInsets.all(15.0),
                             ),

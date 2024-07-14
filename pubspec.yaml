@@ -38,6 +38,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   numberpicker: ^2.1.2
+  dropdown_button2: ^2.1.4
 
 
 dev_dependencies:
@@ -67,6 +68,8 @@ flutter:
     - assets/fonts/
     - assets/images/logo.png
     - assets/images/logo-yrp.png
+    - assets/images/vehicle-damage.png
+
 
 
   fonts:

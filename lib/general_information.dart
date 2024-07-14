@@ -123,7 +123,7 @@ class _NextPageState extends State<NextPage> {
         body: SingleChildScrollView(
           child: LayoutBuilder(
             builder: (context, constraints) {
-              double containerWidth = constraints.maxWidth * 0.7;
+              double containerWidth = constraints.maxWidth * 0.6;
 
               if (constraints.maxWidth < 600) {
                 containerWidth = constraints
@@ -327,43 +327,52 @@ class _NextPageState extends State<NextPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.3,
-                            child: DropdownButtonFormField(
-                              value: _selectedMunicipality,
-                              items: [
-                                'Municipality 1',
-                                'Municipality 2',
-                                'Municipality 3',
-                                'Municipality 4'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style: const TextStyle(
-                                      fontFamily: 'ArchivoNarrow',
-                                      fontSize: 16.0,
-                                    ),
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          child: DropdownButtonFormField(
+                            value: _selectedMunicipality,
+                            items: [
+                              'Aurora',
+                              'East Gwillimbury',
+                              'Georgina',
+                              'King Township',
+                              'Newmarket',
+                              'Richmond Hill',
+                              'Markham',
+                              'Whitchurch-Stouffville',
+                              'Vaughan',
+                              'Other',
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: const TextStyle(
+                                    fontFamily: 'ArchivoNarrow',
+                                    fontSize: 16.0,
                                   ),
-                                );
-                              }).toList(),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  _selectedMunicipality = newValue;
-                                  _validateInput();
-                                });
-                              },
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color.fromRGBO(0, 61, 121, 1),
-                                      width: 2.0),
                                 ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 10.0, horizontal: 10.0),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _selectedMunicipality = newValue;
+                                _validateInput();
+                              });
+                            },
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(0, 61, 121, 1),
+                                    width: 2.0),
                               ),
-                            )),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 10.0),
+                            ),
+                            menuMaxHeight: 300,
+                            isExpanded: true,
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 30),
                       Padding(
@@ -1088,7 +1097,7 @@ class _NextPageState extends State<NextPage> {
                       ),
                       const SizedBox(height: 20),
                       Padding(
-                        padding: const EdgeInsets.only(right: 20.0, bottom: 20),
+                        padding: const EdgeInsets.only(right: 40.0, bottom: 20),
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: SizedBox(
@@ -1111,7 +1120,7 @@ class _NextPageState extends State<NextPage> {
                                     ? const Color.fromRGBO(0, 61, 121, 1)
                                     : Colors.grey.withOpacity(0.5),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40.0),
+                                  borderRadius: BorderRadius.circular(5.0),
                                 ),
                                 padding: const EdgeInsets.all(15.0),
                               ),

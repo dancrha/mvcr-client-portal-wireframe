@@ -128,7 +128,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
         body: SingleChildScrollView(
           child: LayoutBuilder(
             builder: (context, constraints) {
-              double containerWidth = constraints.maxWidth * 0.7;
+              double containerWidth = constraints.maxWidth * 0.6;
 
               if (constraints.maxWidth < 600) {
                 containerWidth = constraints
@@ -965,7 +965,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                     ? const Color.fromRGBO(0, 61, 121, 1)
                                     : Colors.grey.withOpacity(0.5),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40.0),
+                                  borderRadius: BorderRadius.circular(5.0),
                                 ),
                                 padding: const EdgeInsets.all(15.0),
                               ),
