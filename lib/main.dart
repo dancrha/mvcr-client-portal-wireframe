@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/drivers_statement.dart';
 import 'package:flutter_application_1/general_information.dart';
+import 'package:flutter_application_1/other_drivers_information.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Color.fromRGBO(0, 61, 121, 1),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 80.0),
             child: Row(
               children: [
                 SizedBox(
@@ -74,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, constraints) {
           double containerWidth = constraints.maxWidth * 0.5;
 
-          if (constraints.maxWidth < 600) {
+          if (constraints.maxWidth < 800) {
             containerWidth =
                 constraints.maxWidth; // Snap to screen width if less than 600
           }
@@ -101,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     const SizedBox(height: 20),
                     const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: EdgeInsets.symmetric(horizontal: 80.0),
                       child: Text(
                         'Welcome',
                         style: TextStyle(
@@ -113,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     const SizedBox(height: 10),
                     const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: EdgeInsets.symmetric(horizontal: 80.0),
                       child: Text(
                         'Motor Vehicle Collision Report Online Form',
                         style: TextStyle(
@@ -123,50 +125,46 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: const Text(
-                          'Please enter the incident number you received from York Regional Police. If you do not have an incident number please call the non-emergency line at XXX-XXX-XXXX.',
-                          style: TextStyle(
-                            fontFamily: 'ArchivoNarrow',
-                            //fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
+                    const SizedBox(height: 60),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 80.0, right: 80.0),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: const Text(
+                            'Please enter the incident number you received from York Regional Police.\n\nIf you do not have an incident number please call the non-emergency line at XXX-XXX-XXXX.',
+                            style: TextStyle(
+                              fontFamily: 'ArchivoNarrow',
+                              fontSize: 16.0,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.2,
-                        child: Theme(
-                          data: ThemeData(
-                            fontFamily: 'ArchivoNarrow',
-                          ),
-                          child: TextFormField(
-                            controller: _incidentController,
-                            style: const TextStyle(fontSize: 16.0),
-                            cursorColor: Color.fromRGBO(
-                                0, 61, 121, 1), // Set cursor color to dark blue
-                            decoration: InputDecoration(
-                              labelText: 'Incident #',
-                              labelStyle: TextStyle(
-                                color: Colors
-                                    .black, // Set label text color to black when not focused
-                              ),
-                              floatingLabelStyle: TextStyle(
-                                color: Color.fromRGBO(0, 61, 121,
-                                    1), // Set label text color to dark blue when focused
-                              ),
-                              border: OutlineInputBorder(),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color.fromRGBO(0, 61, 121, 1),
-                                  width: 2.0,
+                    const SizedBox(height: 30),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          child: Theme(
+                            data: ThemeData(
+                              fontFamily: 'ArchivoNarrow',
+                            ),
+                            child: TextFormField(
+                              controller: _incidentController,
+                              style: const TextStyle(fontSize: 16.0),
+                              cursorColor: const Color.fromRGBO(0, 61, 121,
+                                  1), // Set cursor color to dark blue
+                              decoration: const InputDecoration(
+                                hintText: 'e.g. 2024-123456',
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color.fromRGBO(0, 61, 121, 1),
+                                    width: 2.0,
+                                  ),
                                 ),
                               ),
                             ),
@@ -174,9 +172,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 90),
                     Padding(
-                      padding: const EdgeInsets.only(right: 20.0, bottom: 20),
+                      padding: const EdgeInsets.only(right: 25.0, bottom: 25.0),
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: SizedBox(

@@ -397,7 +397,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     const SizedBox(height: 10),
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                          0.175,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -407,6 +407,8 @@ class _DriverInformationState extends State<DriverInformation> {
                                           cursorColor: const Color.fromRGBO(
                                               0, 61, 121, 1),
                                           decoration: const InputDecoration(
+                                            hintText:
+                                                'Note: please do not include dashes or spaces.', // Add your hint text here
                                             border: OutlineInputBorder(),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
