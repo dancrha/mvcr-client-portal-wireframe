@@ -125,7 +125,7 @@ class _NextPageState extends State<NextPage> {
             builder: (context, constraints) {
               double containerWidth = constraints.maxWidth * 0.6;
 
-              if (constraints.maxWidth < 600) {
+              if (constraints.maxWidth < 1100) {
                 containerWidth = constraints
                     .maxWidth; // Snap to screen width if less than 600
               }
@@ -213,7 +213,7 @@ class _NextPageState extends State<NextPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: RichText(
@@ -300,7 +300,7 @@ class _NextPageState extends State<NextPage> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: RichText(
@@ -374,7 +374,7 @@ class _NextPageState extends State<NextPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: RichText(
@@ -452,7 +452,7 @@ class _NextPageState extends State<NextPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: RichText(
@@ -539,7 +539,7 @@ class _NextPageState extends State<NextPage> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: RichText(
@@ -626,7 +626,7 @@ class _NextPageState extends State<NextPage> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: Column(
@@ -781,7 +781,7 @@ class _NextPageState extends State<NextPage> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: RichText(
@@ -868,7 +868,7 @@ class _NextPageState extends State<NextPage> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: RichText(
@@ -956,7 +956,7 @@ class _NextPageState extends State<NextPage> {
                         ),
                       ),
                       if (_leaveWithoutExchanging == 'Yes') ...{
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 40),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 80.0),
                           child: RichText(
@@ -1045,57 +1045,7 @@ class _NextPageState extends State<NextPage> {
                           ),
                         ),
                       },
-                      const SizedBox(height: 30),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
-                        child: RichText(
-                          text: const TextSpan(
-                            style: TextStyle(
-                              fontFamily: 'ArchivoNarrow',
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black, // Set default color for text
-                            ),
-                            children: [
-                              TextSpan(
-                                  text:
-                                      'Including your own, how many vehicles were involved in the collision?'),
-                              TextSpan(
-                                text: ' *',
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          child: Theme(
-                            data: ThemeData(
-                              fontFamily: 'ArchivoNarrow',
-                            ),
-                            child: TextFormField(
-                              controller: _incidentController,
-                              style: const TextStyle(fontSize: 16.0),
-                              cursorColor: const Color.fromRGBO(0, 61, 121,
-                                  1), // Set cursor color to dark blue
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromRGBO(0, 61, 121, 1),
-                                    width: 2.0,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 60),
                       Padding(
                         padding: const EdgeInsets.only(right: 40.0, bottom: 20),
                         child: Align(

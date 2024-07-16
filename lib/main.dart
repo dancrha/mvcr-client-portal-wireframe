@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context, constraints) {
           double containerWidth = constraints.maxWidth * 0.5;
 
-          if (constraints.maxWidth < 800) {
+          if (constraints.maxWidth < 1000) {
             containerWidth =
                 constraints.maxWidth; // Snap to screen width if less than 600
           }
@@ -147,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.2,
+                          width: 300,
                           child: Theme(
                             data: ThemeData(
                               fontFamily: 'ArchivoNarrow',

@@ -134,7 +134,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
             builder: (context, constraints) {
               double containerWidth = constraints.maxWidth * 0.6;
 
-              if (constraints.maxWidth < 600) {
+              if (constraints.maxWidth < 1100) {
                 containerWidth = constraints
                     .maxWidth; // Snap to screen width if less than 600
               }

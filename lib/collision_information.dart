@@ -130,7 +130,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
             builder: (context, constraints) {
               double containerWidth = constraints.maxWidth * 0.6;
 
-              if (constraints.maxWidth < 600) {
+              if (constraints.maxWidth < 1100) {
                 containerWidth = constraints
                     .maxWidth; // Snap to screen width if less than 600
               }
@@ -206,7 +206,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment
                             .start, // This aligns children to the start (left) of the column
@@ -301,7 +301,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.3,
+                            width: 400,
                             child: DropdownButtonFormField(
                               value: _weather,
                               items: [
@@ -344,7 +344,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                               ),
                             )),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.only(left: 80.0),
                         child: RichText(
@@ -372,7 +372,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.3,
+                            width: 400,
                             child: DropdownButtonFormField(
                               value: _roadCondition,
                               items: [
@@ -410,7 +410,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                               ),
                             )),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.only(left: 80.0),
                         child: RichText(
@@ -438,7 +438,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.3,
+                            width: 400,
                             child: DropdownButtonFormField(
                               value: _roadSurface,
                               items: [
@@ -481,7 +481,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                               ),
                             )),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.only(left: 80.0),
                         child: RichText(
@@ -509,7 +509,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.3,
+                            width: 400,
                             child: DropdownButtonFormField(
                               value: _roadAlignment,
                               items: [
@@ -547,7 +547,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                               ),
                             )),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.only(left: 80.0),
                         child: RichText(
@@ -635,7 +635,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.only(left: 80.0),
                         child: RichText(
@@ -663,7 +663,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
                         child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.3,
+                            width: 400,
                             child: DropdownButtonFormField(
                               value: _direction,
                               items: [
@@ -701,7 +701,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                               ),
                             )),
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.only(left: 80.0),
                         child: RichText(
@@ -789,7 +789,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                         ),
                       ),
                       if (_propertyDamage == 'Yes') ...{
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 40),
                         Padding(
                           padding:
                               const EdgeInsets.only(left: 80.0, right: 80.0),
@@ -852,7 +852,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                           ),
                         ),
                       },
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.only(left: 80.0),
                         child: RichText(
@@ -940,7 +940,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 50),
                       Padding(
                         padding: const EdgeInsets.only(right: 20.0, bottom: 20),
                         child: Align(
