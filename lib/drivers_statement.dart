@@ -89,7 +89,7 @@ class _DriversStatementState extends State<DriversStatement> {
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 80.0),
                         child: Text(
-                          "Driver's Statement",
+                          "Reporting Driver's Statement",
                           style: TextStyle(
                             fontFamily: 'ArchivoNarrow',
                             fontWeight: FontWeight.bold,

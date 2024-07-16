@@ -252,13 +252,23 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                 ),
                                 SizedBox(width: 10),
                                 Container(
-                                  width: 50,
-                                  child: Text(
-                                    '$_currentValue',
-                                    style: TextStyle(fontSize: 16),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
+                                    width: 50,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey, // Border color
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                          5.0), // Optional: Border radius
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '$_currentValue',
+                                        style: TextStyle(fontSize: 16),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )),
                                 SizedBox(width: 10),
                                 IconButton(
                                   icon: Icon(Icons.add),
@@ -270,7 +280,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                 ),
                               ],
                             ),
-                          ),
+                          )
                         ],
                       ),
                       const SizedBox(height: 30),

@@ -169,30 +169,42 @@ class _PassengersInformationState extends State<PassengersInformation> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 IconButton(
-                                  icon: const Icon(Icons.remove),
+                                  icon: Icon(Icons.remove),
                                   onPressed: () {
                                     setState(() {
-                                      if (_currentValue > 0) _currentValue--;
+                                      if (_currentValue > 1) _currentValue--;
                                     });
                                   },
                                 ),
+                                SizedBox(width: 10),
+                                Container(
+                                    width: 50,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey, // Border color
+                                        width: 1.0, // Border width
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                          5.0), // Optional: Border radius
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '$_currentValue',
+                                        style: const TextStyle(fontSize: 16),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )),
                                 const SizedBox(width: 10),
-                                SizedBox(
-                                  width: 50,
-                                  child: Text(
-                                    '$_currentValue',
-                                    style: const TextStyle(fontSize: 16),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                IconButton(
-                                  icon: const Icon(Icons.add),
-                                  onPressed: () {
+                                InkWell(
+                                  onTap: () {
                                     setState(() {
-                                      _currentValue++;
+                                      if (_currentValue < 8) _currentValue++;
                                     });
                                   },
+                                  child: Icon(Icons.add),
+                                  borderRadius: BorderRadius.circular(
+                                      5.0), // Optional: Rounded corners for the ripple effect
                                 ),
                               ],
                             ),

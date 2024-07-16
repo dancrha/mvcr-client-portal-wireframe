@@ -160,7 +160,7 @@ class _DriverInformationState extends State<DriverInformation> {
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 80.0),
                         child: Text(
-                          'Driver Information',
+                          'Reporting Driver Information',
                           style: TextStyle(
                             fontFamily: 'ArchivoNarrow',
                             fontWeight: FontWeight.bold,
