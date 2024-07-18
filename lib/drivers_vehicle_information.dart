@@ -626,7 +626,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                           style: TextStyle(
                             fontFamily: 'ArchivoNarrow',
                             fontWeight: FontWeight.bold,
-                            fontSize: 26.0,
+                            fontSize: 24.0,
                           ),
                         ),
                       ),

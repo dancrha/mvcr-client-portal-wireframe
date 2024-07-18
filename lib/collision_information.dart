@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/driver_information.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 class CollisionInformation extends StatefulWidget {
   const CollisionInformation({super.key});
@@ -13,6 +17,9 @@ class _CollisionInformationState extends State<CollisionInformation> {
   TextEditingController _incidentController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
   TextEditingController _timeController = TextEditingController();
+
+  TextEditingController _locationController = TextEditingController();
+  MapController _mapController = MapController();
   bool _isValid = true;
   String? _roadSurface;
   String? _roadCondition;
@@ -29,6 +36,10 @@ class _CollisionInformationState extends State<CollisionInformation> {
   String? _driverInfo;
   int _currentValue = 1; // You can set any default value
   bool _isButtonEnabled = true;
+
+  LatLng _selectedLocation =
+      LatLng(43.844068, -79.431071); // Default to Toronto
+  String _address = "";
   @override
   void initState() {
     super.initState();
@@ -39,6 +50,24 @@ class _CollisionInformationState extends State<CollisionInformation> {
 
   void _validateInput() {
     setState(() {});
+  }
+
+  Future<void> _getAddressFromCoordinates(LatLng point) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        point.latitude,
+        point.longitude,
+      );
+
+      if (placemarks.isNotEmpty) {
+        Placemark place = placemarks[0];
+        String address =
+            "${place.street}, ${place.locality}, ${place.administrativeArea}, ${place.country}";
+        _locationController.text = address;
+      }
+    } catch (e) {
+      _locationController.text = "Address not found";
+    }
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -67,6 +96,20 @@ class _CollisionInformationState extends State<CollisionInformation> {
       setState(() {
         _dateController.text = "${picked.toLocal()}".split(' ')[0];
       });
+    }
+  }
+
+  Future<void> _getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      setState(() {
+        _selectedLocation = LatLng(position.latitude, position.longitude);
+        _mapController.move(_selectedLocation, 15);
+      });
+    } catch (e) {
+      print("Error getting location: $e");
     }
   }
 
@@ -207,6 +250,172 @@ class _CollisionInformationState extends State<CollisionInformation> {
                         ),
                       ),
                       const SizedBox(height: 40),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 80.0),
+                        child: RichText(
+                          text: const TextSpan(
+                            style: TextStyle(
+                              fontFamily: 'ArchivoNarrow',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            children: [
+                              TextSpan(
+                                text:
+                                    'Where did the collision occur? (Address, Roadway or Intersection)',
+                              ),
+                              TextSpan(
+                                text: ' *',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 80.0),
+                        child: Text(
+                            'Enter the location manually or select the location on the map.',
+                            style: TextStyle(
+                              fontFamily: 'ArchivoNarrow',
+                              fontSize: 16.0,
+                              color: Colors.black,
+                            )),
+                      ),
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 80.0),
+                        child: SizedBox(
+                          width: 300,
+                          child: Theme(
+                            data: ThemeData(fontFamily: 'ArchivoNarrow'),
+                            child: TextFormField(
+                              controller: _locationController,
+                              style: const TextStyle(fontSize: 16.0),
+                              cursorColor: const Color.fromRGBO(0, 61, 121, 1),
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color.fromRGBO(0, 61, 121, 1),
+                                    width: 2.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        height: 400,
+                        width: 600,
+                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        child: Stack(
+                          children: [
+                            FlutterMap(
+                              mapController: _mapController,
+                              options: MapOptions(
+                                center: _selectedLocation,
+                                zoom: 9.8,
+                                maxZoom: 18.0,
+                                onTap: (tapPosition, point) {
+                                  setState(() {
+                                    _selectedLocation = point;
+                                    _locationController.text =
+                                        "${point.latitude}, ${point.longitude}";
+                                    // Implement a reverse geocoding function here to get a human-readable address if needed
+                                  });
+                                },
+                              ),
+                              children: [
+                                TileLayer(
+                                  urlTemplate:
+                                      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                  subdomains: ['a', 'b', 'c'],
+                                ),
+                                MarkerLayer(
+                                  markers: [
+                                    Marker(
+                                      width: 80.0,
+                                      height: 80.0,
+                                      point: _selectedLocation,
+                                      builder: (ctx) => const Align(
+                                        alignment: Alignment.topCenter,
+                                        child: Icon(
+                                          Icons.location_on,
+                                          color: Colors.red,
+                                          size: 40,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Positioned(
+                              bottom: 16,
+                              right: 16,
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    width: 40, // Adjust the size as needed
+                                    height: 40, // Adjust the size as needed
+                                    child: FloatingActionButton(
+                                      heroTag: "zoomIn",
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.black,
+                                      ),
+                                      onPressed: () {
+                                        // Implement zoom in functionality
+                                        _mapController.move(
+                                            _mapController.center,
+                                            _mapController.zoom + 1);
+                                      },
+                                      backgroundColor:
+                                          Colors.white, // Set background color
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10.0), // Adjust the radius to make it more square
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  SizedBox(
+                                    width: 40, // Adjust the size as needed
+                                    height: 40, // Adjust the size as needed
+                                    child: FloatingActionButton(
+                                      heroTag: "zoomOut",
+                                      child: Icon(
+                                        Icons.remove,
+                                        color: Colors.black,
+                                      ),
+                                      onPressed: () {
+                                        // Implement zoom out functionality
+                                        _mapController.move(
+                                            _mapController.center,
+                                            _mapController.zoom - 1);
+                                      },
+                                      backgroundColor:
+                                          Colors.white, // Set background color
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10.0), // Adjust the radius to make it more square
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 40),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment
                             .start, // This aligns children to the start (left) of the column
@@ -283,7 +492,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                           )
                         ],
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.only(left: 80.0),
                         child: RichText(
