@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _incidentController = TextEditingController();
   bool _isValid = true;
+  bool _isButtonEnabled = true;
 
   @override
   void initState() {
@@ -158,6 +159,10 @@ class _MyHomePageState extends State<MyHomePage> {
                               cursorColor: const Color.fromRGBO(0, 61, 121,
                                   1), // Set cursor color to dark blue
                               decoration: const InputDecoration(
+                                labelText: 'Incident Number',
+                                floatingLabelStyle: TextStyle(
+                                  color: Color.fromRGBO(0, 61, 121, 1),
+                                ),
                                 hintText: 'e.g. 2024-123456',
                                 border: OutlineInputBorder(),
                                 focusedBorder: OutlineInputBorder(
@@ -174,44 +179,69 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     const SizedBox(height: 90),
                     Padding(
-                      padding: const EdgeInsets.only(right: 25.0, bottom: 25.0),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: SizedBox(
-                          width: 150,
-                          height: 40,
-                          child: TextButton(
-                            onPressed: _isValid
-                                ? () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => NextPage(),
-                                      ),
-                                    );
-                                  }
-                                : null,
-                            style: TextButton.styleFrom(
-                              backgroundColor: _isValid
-                                  ? const Color.fromRGBO(0, 61, 121, 1)
-                                  : Colors.grey.withOpacity(0.5),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                              padding: const EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.only(right: 40, bottom: 20),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Container(
+                            width: 130,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
                             ),
-                            child: const Text(
-                              'Continue',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16.0,
-                                fontFamily: 'ArchivoNarrow',
+                            child: TextButton(
+                              onPressed: _isButtonEnabled
+                                  ? () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const GeneralInformation(),
+                                        ),
+                                      );
+                                    }
+                                  : null,
+                              style: TextButton.styleFrom(
+                                backgroundColor: _isButtonEnabled
+                                    ? const Color.fromRGBO(
+                                        0, 61, 121, 1) // Keep the blue color
+                                    : Colors.grey.withOpacity(0.5),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(40.0),
+                                ),
+                                padding: EdgeInsets.zero,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      'Continue',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17.0,
+                                        fontFamily: 'ArchivoNarrow',
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.navigate_next,
+                                    size: 22,
+                                    color: Colors.white,
+                                  )
+                                ],
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
+                        )),
                   ],
                 ),
               ),

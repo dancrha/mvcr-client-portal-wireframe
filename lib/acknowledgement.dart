@@ -138,8 +138,8 @@ class _AcknowledgementState extends State<Acknowledgement> {
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: SizedBox(
-                            width: 150,
-                            height: 40,
+                            width: 120,
+                            height: 45,
                             child: TextButton(
                               onPressed: _isValid
                                   ? () {
@@ -159,20 +159,34 @@ class _AcknowledgementState extends State<Acknowledgement> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(40.0),
                                 ),
-                                padding: const EdgeInsets.all(15.0),
+                                padding:
+                                    EdgeInsets.zero, // Remove default padding
                               ),
-                              child: const Text(
-                                'Continue',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontFamily: 'ArchivoNarrow',
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .center, // Center row contents
+                                  children: const [
+                                    Text(
+                                      'Continue',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17.0,
+                                        fontFamily: 'ArchivoNarrow',
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.navigate_next,
+                                      size: 26,
+                                      color: Colors.white,
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),

@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_application_1/acknowledgement.dart';
 import 'package:flutter_application_1/other_drivers_information.dart';
 
 class DriversStatement extends StatefulWidget {
@@ -332,34 +334,50 @@ class _DriversStatementState extends State<DriversStatement> {
                                     Row(
                                       children: [
                                         ElevatedButton(
-                                            onPressed: () async {
-                                              final FilePickerResult? result =
-                                                  await FilePicker.platform
-                                                      .pickFiles();
-                                              if (result != null) {
-                                                setState(() {
-                                                  driversLicenceFileName =
-                                                      result.files.single.name;
-                                                });
-                                              }
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    const Color.fromRGBO(
-                                                        0, 61, 121, 1)),
-                                            child: const Padding(
-                                              padding: EdgeInsets.all(5),
-                                              child: Text(
-                                                'Upload file',
-                                                style: TextStyle(
-                                                  fontFamily: 'ArchivoNarrow',
-                                                  color: Colors.white,
-                                                  fontSize: 16.0,
+                                          onPressed: () async {
+                                            final FilePickerResult? result =
+                                                await FilePicker.platform
+                                                    .pickFiles();
+                                            if (result != null) {
+                                              setState(() {
+                                                driversLicenceFileName =
+                                                    result.files.single.name;
+                                              });
+                                            }
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color.fromRGBO(
+                                                    0, 61, 121, 1),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 6),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize
+                                                  .min, // To wrap the content of the button
+                                              children: const [
+                                                Icon(Icons.upload_sharp,
+                                                    color: Colors.white),
+                                                SizedBox(width: 5),
+                                                Text(
+                                                  'Upload File',
+                                                  style: TextStyle(
+                                                    fontFamily: 'ArchivoNarrow',
+                                                    color: Colors.white,
+                                                    fontSize: 16.0,
+                                                  ),
                                                 ),
-                                              ),
-                                            )),
-                                        if (driversLicenceFileName != null) ...{
-                                          const SizedBox(width: 10),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    if (driversLicenceFileName != null) ...{
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        children: [
                                           Text(
                                             '$driversLicenceFileName',
                                             style: const TextStyle(
@@ -368,83 +386,107 @@ class _DriversStatementState extends State<DriversStatement> {
                                               fontSize: 16.0,
                                             ),
                                           ),
-                                        },
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(width: 120),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    RichText(
-                                      text: const TextSpan(
-                                        style: TextStyle(
-                                          fontFamily: 'ArchivoNarrow',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        ),
-                                        children: [
-                                          TextSpan(
-                                            text: 'Proof of Your Insurance',
-                                          ),
-                                          TextSpan(
-                                            text: ' *',
-                                            style: TextStyle(color: Colors.red),
-                                          ),
+                                          IconButton(
+                                              onPressed: () {},
+                                              icon: const Icon(
+                                                  Icons.clear_rounded))
                                         ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      children: [
-                                        ElevatedButton(
-                                            onPressed: () async {
-                                              final FilePickerResult? result =
-                                                  await FilePicker.platform
-                                                      .pickFiles();
-                                              if (result != null) {
-                                                setState(() {
-                                                  proofOfInsurance =
-                                                      result.files.single.name;
-                                                });
-                                              }
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    const Color.fromRGBO(
-                                                        0, 61, 121, 1)),
-                                            child: const Padding(
-                                              padding: EdgeInsets.all(5),
-                                              child: Text(
-                                                'Upload file',
-                                                style: TextStyle(
-                                                  fontFamily: 'ArchivoNarrow',
-                                                  color: Colors.white,
-                                                  fontSize: 16.0,
-                                                ),
-                                              ),
-                                            )),
-                                        if (proofOfInsurance != null) ...{
-                                          const SizedBox(width: 10),
-                                          Text(
-                                            '$proofOfInsurance',
-                                            style: const TextStyle(
-                                              fontFamily: 'ArchivoNarrow',
-                                              color: Colors.black,
-                                              fontSize: 16.0,
-                                            ),
-                                          ),
-                                        },
-                                      ],
-                                    ),
+                                      )
+                                    },
                                   ],
                                 ),
                               ],
                             ),
                           ),
                         ],
+                      ),
+                      const SizedBox(height: 40),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 80),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                              text: const TextSpan(
+                                style: TextStyle(
+                                  fontFamily: 'ArchivoNarrow',
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: 'Proof of Your Insurance',
+                                  ),
+                                  TextSpan(
+                                    text: ' *',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    final FilePickerResult? result =
+                                        await FilePicker.platform.pickFiles();
+                                    if (result != null) {
+                                      setState(() {
+                                        proofOfInsurance =
+                                            result.files.single.name;
+                                      });
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        const Color.fromRGBO(0, 61, 121, 1),
+                                  ),
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 6),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize
+                                          .min, // To wrap the content of the button
+                                      children: const [
+                                        Icon(Icons.upload_sharp,
+                                            color: Colors.white),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          'Upload File',
+                                          style: TextStyle(
+                                            fontFamily: 'ArchivoNarrow',
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            if (proofOfInsurance != null) ...{
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Text(
+                                    '$proofOfInsurance',
+                                    style: const TextStyle(
+                                      fontFamily: 'ArchivoNarrow',
+                                      color: Colors.black,
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.clear_rounded))
+                                ],
+                              )
+                            },
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 40),
                       Padding(
@@ -465,32 +507,47 @@ class _DriversStatementState extends State<DriversStatement> {
                             Row(
                               children: [
                                 ElevatedButton(
-                                    onPressed: () async {
-                                      final FilePickerResult? result =
-                                          await FilePicker.platform.pickFiles();
-                                      if (result != null) {
-                                        setState(() {
-                                          damagePhotos =
-                                              result.files.single.name;
-                                        });
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color.fromRGBO(
-                                            0, 61, 121, 1)),
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(5),
-                                      child: Text(
-                                        'Upload file',
-                                        style: TextStyle(
-                                          fontFamily: 'ArchivoNarrow',
-                                          color: Colors.white,
-                                          fontSize: 16.0,
+                                  onPressed: () async {
+                                    final FilePickerResult? result =
+                                        await FilePicker.platform.pickFiles();
+                                    if (result != null) {
+                                      setState(() {
+                                        damagePhotos = result.files.single.name;
+                                      });
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        const Color.fromRGBO(0, 61, 121, 1),
+                                  ),
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 6),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize
+                                          .min, // To wrap the content of the button
+                                      children: const [
+                                        Icon(Icons.upload_sharp,
+                                            color: Colors.white),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          'Upload File',
+                                          style: TextStyle(
+                                            fontFamily: 'ArchivoNarrow',
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                          ),
                                         ),
-                                      ),
-                                    )),
-                                if (damagePhotos != null) ...{
-                                  const SizedBox(width: 10),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            if (damagePhotos != null) ...{
+                              const SizedBox(width: 10),
+                              Row(
+                                children: [
                                   Text(
                                     '$damagePhotos',
                                     style: const TextStyle(
@@ -499,9 +556,12 @@ class _DriversStatementState extends State<DriversStatement> {
                                       fontSize: 16.0,
                                     ),
                                   ),
-                                },
-                              ],
-                            ),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.clear_rounded))
+                                ],
+                              )
+                            },
                           ],
                         ),
                       ),
@@ -524,32 +584,50 @@ class _DriversStatementState extends State<DriversStatement> {
                             Row(
                               children: [
                                 ElevatedButton(
-                                    onPressed: () async {
-                                      final FilePickerResult? result =
-                                          await FilePicker.platform.pickFiles();
-                                      if (result != null) {
-                                        setState(() {
-                                          otherDriversDocuments =
-                                              result.files.single.name;
-                                        });
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color.fromRGBO(
-                                            0, 61, 121, 1)),
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(5),
-                                      child: Text(
-                                        'Upload file',
-                                        style: TextStyle(
-                                          fontFamily: 'ArchivoNarrow',
-                                          color: Colors.white,
-                                          fontSize: 16.0,
+                                  onPressed: () async {
+                                    FilePickerResult? result = await FilePicker
+                                        .platform
+                                        .pickFiles(allowMultiple: true);
+                                    if (result != null) {
+                                      List<File> files = result.paths
+                                          .map((path) => File(path!))
+                                          .toList();
+                                    } else {
+                                      // User canceled the picker
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        const Color.fromRGBO(0, 61, 121, 1),
+                                  ),
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 6),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize
+                                          .min, // To wrap the content of the button
+                                      children: const [
+                                        Icon(Icons.upload_sharp,
+                                            color: Colors.white),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          'Upload File',
+                                          style: TextStyle(
+                                            fontFamily: 'ArchivoNarrow',
+                                            color: Colors.white,
+                                            fontSize: 16.0,
+                                          ),
                                         ),
-                                      ),
-                                    )),
-                                if (otherDriversDocuments != null) ...{
-                                  const SizedBox(width: 10),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            if (otherDriversDocuments != null) ...{
+                              const SizedBox(width: 10),
+                              Row(
+                                children: [
                                   Text(
                                     '$otherDriversDocuments',
                                     style: const TextStyle(
@@ -558,9 +636,12 @@ class _DriversStatementState extends State<DriversStatement> {
                                       fontSize: 16.0,
                                     ),
                                   ),
-                                },
-                              ],
-                            ),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.clear_rounded))
+                                ],
+                              )
+                            },
                           ],
                         ),
                       ),
@@ -570,8 +651,8 @@ class _DriversStatementState extends State<DriversStatement> {
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: SizedBox(
-                            width: 150,
-                            height: 40,
+                            width: 120,
+                            height: 45,
                             child: TextButton(
                               onPressed: _isValid
                                   ? () {
@@ -579,7 +660,7 @@ class _DriversStatementState extends State<DriversStatement> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const OtherDriversInformation(),
+                                              const Acknowledgement(),
                                         ),
                                       );
                                     }
@@ -591,20 +672,34 @@ class _DriversStatementState extends State<DriversStatement> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(40.0),
                                 ),
-                                padding: const EdgeInsets.all(15.0),
+                                padding:
+                                    EdgeInsets.zero, // Remove default padding
                               ),
-                              child: const Text(
-                                'Continue',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontFamily: 'ArchivoNarrow',
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .center, // Center row contents
+                                  children: const [
+                                    Text(
+                                      'Continue',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17.0,
+                                        fontFamily: 'ArchivoNarrow',
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.navigate_next,
+                                      size: 26,
+                                      color: Colors.white,
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),

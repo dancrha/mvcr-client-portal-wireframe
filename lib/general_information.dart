@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/collision_information.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class NextPage extends StatefulWidget {
-  const NextPage({super.key});
+class GeneralInformation extends StatefulWidget {
+  const GeneralInformation({super.key});
 
   @override
-  State<NextPage> createState() => _NextPageState();
+  State<GeneralInformation> createState() => _GeneralInformationState();
 }
 
-class _NextPageState extends State<NextPage> {
+class _GeneralInformationState extends State<GeneralInformation> {
   TextEditingController _incidentController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
   TextEditingController _timeController = TextEditingController();
-  bool _isValid = true;
+  final bool _isValid = false;
   String? _hasCompletedReport;
   String? _selectedMunicipality;
   String? _400series;
@@ -21,6 +22,9 @@ class _NextPageState extends State<NextPage> {
   String? _anyPedCycInvolved;
   String? _leaveWithoutExchanging;
   String? _driverInfo;
+  String? selected;
+
+  bool _isButtonEnabled = true;
 
   @override
   void initState() {
@@ -31,8 +35,31 @@ class _NextPageState extends State<NextPage> {
   }
 
   void _validateInput() {
+    setState(() {});
+  }
+
+  void _updateButtonState() {
     setState(() {
-      _isValid == true;
+      if (_hasCompletedReport == 'No' &&
+          _selectedMunicipality != 'Other' &&
+          _400series == 'No' &&
+          _anyInjuries == 'No' &&
+          _vehiclesInvolved == 'No' &&
+          _anyPedCycInvolved == 'No' &&
+          _leaveWithoutExchanging == 'No') {
+        _isButtonEnabled = true;
+      } else if (_hasCompletedReport == 'No' &&
+          _selectedMunicipality != 'Other' &&
+          _400series == 'No' &&
+          _anyInjuries == 'No' &&
+          _vehiclesInvolved == 'No' &&
+          _anyPedCycInvolved == 'No' &&
+          _leaveWithoutExchanging == 'Yes' &&
+          _driverInfo == 'No') {
+        _isButtonEnabled = true;
+      } else {
+        _isButtonEnabled = false;
+      }
     });
   }
 
@@ -264,6 +291,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _hasCompletedReport = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -292,6 +320,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _hasCompletedReport = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -300,6 +329,30 @@ class _NextPageState extends State<NextPage> {
                           ],
                         ),
                       ),
+                      if (_hasCompletedReport == 'Yes')
+                        Padding(
+                            padding: const EdgeInsets.only(left: 80.0, top: 20),
+                            child: Row(
+                              children: const [
+                                Icon(
+                                  Icons.report,
+                                  color: Color.fromARGB(255, 190, 44, 33),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  'If a police report has already been filed for this collision, you do not need to complete an online report.',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 190, 44, 33),
+                                    fontFamily: 'ArchivoNarrow',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            )),
                       const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
@@ -317,7 +370,9 @@ class _NextPageState extends State<NextPage> {
                                       'In what municipality did the collision happen?'),
                               TextSpan(
                                 text: ' *',
-                                style: TextStyle(color: Colors.red),
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
                               ),
                             ],
                           ),
@@ -357,6 +412,7 @@ class _NextPageState extends State<NextPage> {
                               setState(() {
                                 _selectedMunicipality = newValue;
                                 _validateInput();
+                                _updateButtonState();
                               });
                             },
                             decoration: InputDecoration(
@@ -374,6 +430,31 @@ class _NextPageState extends State<NextPage> {
                           ),
                         ),
                       ),
+                      if (_selectedMunicipality == 'Other') ...{
+                        Padding(
+                            padding: const EdgeInsets.only(left: 80.0, top: 20),
+                            child: Row(
+                              children: const [
+                                Icon(
+                                  Icons.report,
+                                  color: Color.fromARGB(255, 190, 44, 33),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  'Collisions that happen outside of York Region must be reported to the police agency where the incident occurred.',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 190, 44, 33),
+                                    fontFamily: 'ArchivoNarrow',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            )),
+                      },
                       const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
@@ -477,7 +558,7 @@ class _NextPageState extends State<NextPage> {
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: const EdgeInsets.only(left: 80.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -503,6 +584,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _400series = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -531,6 +613,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _400series = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -539,6 +622,57 @@ class _NextPageState extends State<NextPage> {
                           ],
                         ),
                       ),
+                      if (_400series == 'Yes') ...{
+                        Padding(
+                          padding: const EdgeInsets.only(left: 80.0, top: 20),
+                          child: Row(
+                            children: const [
+                              Icon(
+                                Icons.report,
+                                color: Color.fromARGB(255, 190, 44, 33),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                'Collisions that happened on a 400-series highway (400, 404, 407, 427) must be reported to the Ontario Provincial Police.',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 190, 44, 33),
+                                  fontFamily: 'ArchivoNarrow',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 80.0),
+                          child: GestureDetector(
+                            onTap: () async {
+                              final Uri _url = Uri.parse('https://www.opp.ca/');
+                              if (await canLaunchUrl(_url)) {
+                                await launchUrl(_url);
+                              } else {
+                                throw 'Could not launch $_url';
+                              }
+                            },
+                            child: const Text(
+                              'Visit the Ontario Provincial Police website',
+                              style: TextStyle(
+                                color: Color.fromRGBO(0, 61, 121, 1),
+                                fontFamily: 'ArchivoNarrow',
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                        )
+                      },
                       const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
@@ -590,6 +724,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _anyInjuries = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -618,6 +753,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _anyInjuries = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -626,6 +762,38 @@ class _NextPageState extends State<NextPage> {
                           ],
                         ),
                       ),
+                      if (_anyInjuries == 'Yes') ...{
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 80.0, right: 80.0, top: 20),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment
+                                .start, // Align items to the top
+                            children: const [
+                              Icon(
+                                Icons.report,
+                                color: Color.fromARGB(255, 190, 44, 33),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Please call 1-866-876-5423 ext.7700 to speak to a York Regional Police officer about your collision. A collision that resulted in injury cannot be reported online.',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 190, 44, 33),
+                                    fontFamily: 'ArchivoNarrow',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  softWrap: true,
+                                  overflow: TextOverflow.visible,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      },
                       const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
@@ -745,6 +913,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _vehiclesInvolved = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -773,6 +942,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _vehiclesInvolved = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -781,6 +951,38 @@ class _NextPageState extends State<NextPage> {
                           ],
                         ),
                       ),
+                      if (_vehiclesInvolved == 'Yes') ...{
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 80.0, right: 80.0, top: 20),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment
+                                .start, // Align items to the top
+                            children: const [
+                              Icon(
+                                Icons.report,
+                                color: Color.fromARGB(255, 190, 44, 33),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Please call 1-866-876-5423 ext.7700 to speak to a York Regional Police officer about your collision. A collision involving any of these vehicle types cannot be reported online.',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 190, 44, 33),
+                                    fontFamily: 'ArchivoNarrow',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  softWrap: true,
+                                  overflow: TextOverflow.visible,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      },
                       const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
@@ -832,6 +1034,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _anyPedCycInvolved = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -860,6 +1063,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _anyPedCycInvolved = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -868,6 +1072,38 @@ class _NextPageState extends State<NextPage> {
                           ],
                         ),
                       ),
+                      if (_anyPedCycInvolved == 'Yes') ...{
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 80.0, right: 80.0, top: 20),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment
+                                .start, // Align items to the top
+                            children: const [
+                              Icon(
+                                Icons.report,
+                                color: Color.fromARGB(255, 190, 44, 33),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Please call 1-866-876-5423 ext.7700 to speak to a York Regional Police officer about your collision. A collision involving pedestrians or cyclists cannot be reported online.',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 190, 44, 33),
+                                    fontFamily: 'ArchivoNarrow',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  softWrap: true,
+                                  overflow: TextOverflow.visible,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      },
                       const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 80.0),
@@ -919,6 +1155,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _leaveWithoutExchanging = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -947,6 +1184,7 @@ class _NextPageState extends State<NextPage> {
                                   setState(() {
                                     _leaveWithoutExchanging = value;
                                     _validateInput();
+                                    _updateButtonState();
                                   });
                                 },
                               ),
@@ -1008,6 +1246,7 @@ class _NextPageState extends State<NextPage> {
                                     setState(() {
                                       _driverInfo = value;
                                       _validateInput();
+                                      _updateButtonState();
                                     });
                                   },
                                 ),
@@ -1036,6 +1275,7 @@ class _NextPageState extends State<NextPage> {
                                     setState(() {
                                       _driverInfo = value;
                                       _validateInput();
+                                      _updateButtonState();
                                     });
                                   },
                                 ),
@@ -1045,47 +1285,174 @@ class _NextPageState extends State<NextPage> {
                           ),
                         ),
                       },
-                      const SizedBox(height: 60),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 40.0, bottom: 20),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: SizedBox(
-                            width: 150,
-                            height: 40,
-                            child: TextButton(
-                              onPressed: _isValid
-                                  ? () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const CollisionInformation(),
-                                        ),
-                                      );
-                                    }
-                                  : null,
-                              style: TextButton.styleFrom(
-                                backgroundColor: _isValid
-                                    ? const Color.fromRGBO(0, 61, 121, 1)
-                                    : Colors.grey.withOpacity(0.5),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                padding: const EdgeInsets.all(15.0),
+                      if (_driverInfo == 'Yes') ...{
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 80.0, right: 80.0, top: 20),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment
+                                .start, // Align items to the top
+                            children: const [
+                              Icon(
+                                Icons.report,
+                                color: Color.fromARGB(255, 190, 44, 33),
                               ),
-                              child: const Text(
-                                'Continue',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16.0,
-                                  fontFamily: 'ArchivoNarrow',
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Please call 1-866-876-5423 ext.7700 to speak to a York Regional Police officer about your collision. A collision involving an individual who failed to remain cannot be reported online.',
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 190, 44, 33),
+                                    fontFamily: 'ArchivoNarrow',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  softWrap: true,
+                                  overflow: TextOverflow.visible,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      },
+                      const SizedBox(height: 80),
+                      Row(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 40, bottom: 20),
+                            child: Container(
+                              width: 110,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 0,
+                                    blurRadius: 2,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ],
+                              ),
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: TextButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40.0),
+                                  ),
+                                  padding: EdgeInsets.zero,
+                                  backgroundColor: const Color.fromRGBO(230,
+                                      240, 255, 1), // Light blue background
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(
+                                      Icons.navigate_before,
+                                      size: 22,
+                                      color: Color.fromRGBO(
+                                          0, 61, 121, 1), // Dark blue icon
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 10),
+                                      child: Text(
+                                        'Back',
+                                        style: TextStyle(
+                                          color: Color.fromRGBO(
+                                              0, 61, 121, 1), // Dark blue text
+                                          fontSize: 16.0,
+                                          fontFamily: 'ArchivoNarrow',
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
+                          const Spacer(),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: Text(
+                              '2 / 8',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontFamily: 'ArchivoNarrow',
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(right: 40, bottom: 20),
+                            child: Container(
+                              width: 130,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 1,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: TextButton(
+                                onPressed: _isButtonEnabled
+                                    ? () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const CollisionInformation(),
+                                          ),
+                                        );
+                                      }
+                                    : null,
+                                style: TextButton.styleFrom(
+                                  backgroundColor: _isButtonEnabled
+                                      ? const Color.fromRGBO(
+                                          0, 61, 121, 1) // Keep the blue color
+                                      : Colors.grey.withOpacity(0.5),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40.0),
+                                  ),
+                                  padding: EdgeInsets.zero,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        'Continue',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 17.0,
+                                          fontFamily: 'ArchivoNarrow',
+                                        ),
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.navigate_next,
+                                      size: 22,
+                                      color: Colors.white,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),
