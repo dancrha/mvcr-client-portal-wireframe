@@ -33,6 +33,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
   String? _leaveWithoutExchanging;
   String? _driverInfo;
   int _currentValue = 1; // You can set any default value
+  bool _isButtonEnabled = true;
 
   @override
   void initState() {
@@ -1397,52 +1398,133 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                           ],
                         ),
                       },
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20.0, bottom: 20),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: SizedBox(
-                            width: 120,
-                            height: 45,
-                            child: TextButton(
-                              onPressed: _isValid
-                                  ? () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const PassengersInformation(),
-                                        ),
-                                      );
-                                    }
-                                  : null,
-                              style: TextButton.styleFrom(
-                                backgroundColor: _isValid
-                                    ? const Color.fromRGBO(0, 61, 121, 1)
-                                    : Colors.grey.withOpacity(0.5),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40.0),
-                                ),
-                                padding:
-                                    EdgeInsets.zero, // Remove default padding
+                      const SizedBox(height: 80),
+                      Row(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 40, bottom: 20),
+                            child: Container(
+                              width: 110,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 0,
+                                    blurRadius: 2,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ],
                               ),
-                              child: Center(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: TextButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40.0),
+                                  ),
+                                  padding: EdgeInsets.zero,
+                                  backgroundColor: const Color.fromRGBO(230,
+                                      240, 255, 1), // Light blue background
+                                ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .center, // Center row contents
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
-                                    Text(
-                                      'Continue',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 17.0,
-                                        fontFamily: 'ArchivoNarrow',
+                                    Icon(
+                                      Icons.navigate_before,
+                                      size: 22,
+                                      color: Color.fromRGBO(
+                                          0, 61, 121, 1), // Dark blue icon
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 10),
+                                      child: Text(
+                                        'Back',
+                                        style: TextStyle(
+                                          color: Color.fromRGBO(
+                                              0, 61, 121, 1), // Dark blue text
+                                          fontSize: 16.0,
+                                          fontFamily: 'ArchivoNarrow',
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: Text(
+                              '5 / 9',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontFamily: 'ArchivoNarrow',
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(right: 40, bottom: 20),
+                            child: Container(
+                              width: 130,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 1,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: TextButton(
+                                onPressed: _isButtonEnabled
+                                    ? () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const PassengersInformation(),
+                                          ),
+                                        );
+                                      }
+                                    : null,
+                                style: TextButton.styleFrom(
+                                  backgroundColor: _isButtonEnabled
+                                      ? const Color.fromRGBO(
+                                          0, 61, 121, 1) // Keep the blue color
+                                      : Colors.grey.withOpacity(0.5),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40.0),
+                                  ),
+                                  padding: EdgeInsets.zero,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        'Continue',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 17.0,
+                                          fontFamily: 'ArchivoNarrow',
+                                        ),
                                       ),
                                     ),
                                     Icon(
                                       Icons.navigate_next,
-                                      size: 26,
+                                      size: 22,
                                       color: Colors.white,
                                     )
                                   ],
@@ -1450,7 +1532,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                               ),
                             ),
                           ),
-                        ),
+                        ],
                       )
                     ],
                   ),

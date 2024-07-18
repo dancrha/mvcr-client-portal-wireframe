@@ -1380,7 +1380,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
                           const Padding(
                             padding: EdgeInsets.only(bottom: 20),
                             child: Text(
-                              '2 / 8',
+                              '2 / 9',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontFamily: 'ArchivoNarrow',
