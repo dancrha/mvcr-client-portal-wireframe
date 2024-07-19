@@ -24,7 +24,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
   String? _driverInfo;
   String? selected;
 
-  bool _isButtonEnabled = true;
+  bool _isButtonEnabled = false;
 
   @override
   void initState() {
@@ -208,7 +208,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
                                   horizontal: 10.0, vertical: 20),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.campaign,
                                     size: 30,
@@ -224,7 +224,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
                                           fontFamily: 'ArchivoNarrow',
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20.0,
-                                          color: Colors.black),
+                                          color: Colors.grey.shade800),
                                     ),
                                   ),
                                 ],
@@ -1458,48 +1458,53 @@ class _GeneralInformationState extends State<GeneralInformation> {
                                   ),
                                 ],
                               ),
-                              child: TextButton(
-                                onPressed: _isButtonEnabled
-                                    ? () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const CollisionInformation(),
-                                          ),
-                                        );
-                                      }
-                                    : null,
-                                style: TextButton.styleFrom(
-                                  backgroundColor: _isButtonEnabled
-                                      ? const Color.fromRGBO(
-                                          0, 61, 121, 1) // Keep the blue color
-                                      : Colors.grey.withOpacity(0.5),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40.0),
+                              child: Tooltip(
+                                message: _isButtonEnabled
+                                    ? ''
+                                    : 'Your collision is ineligible for online reporting',
+                                child: TextButton(
+                                  onPressed: _isButtonEnabled
+                                      ? () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const CollisionInformation(),
+                                            ),
+                                          );
+                                        }
+                                      : null,
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: _isButtonEnabled
+                                        ? const Color.fromRGBO(0, 61, 121,
+                                            1) // Keep the blue color
+                                        : Colors.grey.withOpacity(0.5),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(40.0),
+                                    ),
+                                    padding: EdgeInsets.zero,
                                   ),
-                                  padding: EdgeInsets.zero,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        'Continue',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 17.0,
-                                          fontFamily: 'ArchivoNarrow',
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Text(
+                                          'Continue',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 17.0,
+                                            fontFamily: 'ArchivoNarrow',
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Icon(
-                                      Icons.navigate_next,
-                                      size: 22,
-                                      color: Colors.white,
-                                    )
-                                  ],
+                                      Icon(
+                                        Icons.navigate_next,
+                                        size: 22,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
