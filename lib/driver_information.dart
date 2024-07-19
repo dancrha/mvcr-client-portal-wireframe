@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_application_1/drivers_vehicle_information.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 
 class DriverInformation extends StatefulWidget {
   const DriverInformation({super.key});
@@ -638,7 +640,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
-                                      'Number/Unit',
+                                      'Apt #/Unit',
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
@@ -877,9 +879,14 @@ class _DriverInformationState extends State<DriverInformation> {
                                               ),
                                             ),
                                           ),
+                                          keyboardType: TextInputType.phone,
+                                          inputFormatters: <TextInputFormatter>[
+                                            MaskedInputFormatter(
+                                                '(000) 000-0000'), // Define the phone number pattern
+                                          ],
                                         ),
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
                                 const SizedBox(
@@ -919,6 +926,11 @@ class _DriverInformationState extends State<DriverInformation> {
                                               ),
                                             ),
                                           ),
+                                          keyboardType: TextInputType.phone,
+                                          inputFormatters: <TextInputFormatter>[
+                                            MaskedInputFormatter(
+                                                '(000) 000-0000'), // Define the phone number pattern
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -961,9 +973,14 @@ class _DriverInformationState extends State<DriverInformation> {
                                               ),
                                             ),
                                           ),
+                                          keyboardType: TextInputType.phone,
+                                          inputFormatters: <TextInputFormatter>[
+                                            MaskedInputFormatter(
+                                                '(000) 000-0000'), // Define the phone number pattern
+                                          ],
                                         ),
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
                               ],
