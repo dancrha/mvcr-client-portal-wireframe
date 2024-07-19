@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/acknowledgement.dart';
 import 'package:flutter_application_1/collision_information.dart';
+import 'package:flutter_application_1/driver_information.dart';
 import 'package:flutter_application_1/drivers_statement.dart';
 import 'package:flutter_application_1/general_information.dart';
 import 'package:flutter_application_1/other_drivers_information.dart';
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'MVCR Online Form',
-      home: MyHomePage(title: ''),
+      home: GeneralInformation(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -166,9 +168,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: const Text(
                               'Please enter the incident number you received from York Regional Police.\n\nIf you do not have an incident number please call the non-emergency line at XXX-XXX-XXXX.',
                               style: TextStyle(
-                                fontFamily: 'ArchivoNarrow',
-                                fontSize: 16.0,
-                              ),
+                                  fontFamily: 'ArchivoNarrow',
+                                  fontSize: 16.0,
+                                  color: Colors.black),
                               textAlign: TextAlign.center,
                             ),
                           ),

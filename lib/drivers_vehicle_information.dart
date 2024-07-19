@@ -47,6 +47,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
     setState(() {});
   }
 
+  bool vehicleDamage01 = false;
+  bool vehicleDamage02 = false;
+  bool vehicleDamage03 = false;
+  bool vehicleDamage04 = false;
+  bool vehicleDamage05 = false;
+  bool vehicleDamage06 = false;
+  bool vehicleDamage07 = false;
+  bool vehicleDamage08 = false;
+  bool vehicleDamage09 = false;
+  bool vehicleDamage10 = false;
+  bool vehicleDamage11 = false;
+  bool vehicleDamage12 = false;
+  bool vehicleDamage13 = false;
+  bool vehicleDamage14 = false;
+  bool vehicleDamage15 = false;
+  bool vehicleDamage16 = false;
+  bool vehicleDamage17 = false;
+  bool vehicleDamage18 = false;
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -124,7 +143,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                       'assets/images/logo-yrp.png',
                     ),
                   ),
-                  const SizedBox(width: 20), // Adjust spacing as needed
+                  const SizedBox(width: 30), // Adjust spacing as needed
                 ],
               ),
             ),
@@ -213,35 +232,135 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                         ),
                       ),
                       const SizedBox(height: 40),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
-                            child: Column(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 80.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    RichText(
+                                      text: const TextSpan(
+                                        style: TextStyle(
+                                          fontFamily: 'ArchivoNarrow',
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                        children: [
+                                          TextSpan(text: "Licence Plate"),
+                                          TextSpan(
+                                            text: ' *',
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    SizedBox(
+                                      width: 170,
+                                      child: Theme(
+                                        data: ThemeData(
+                                            fontFamily: 'ArchivoNarrow'),
+                                        child: TextFormField(
+                                          style:
+                                              const TextStyle(fontSize: 16.0),
+                                          cursorColor: const Color.fromRGBO(
+                                              0, 61, 121, 1),
+                                          decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color.fromRGBO(
+                                                    0, 61, 121, 1),
+                                                width: 2.0,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(width: 30),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RichText(
+                                text: const TextSpan(
+                                  style: TextStyle(
+                                    fontFamily: 'ArchivoNarrow',
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                  children: [
+                                    TextSpan(text: "Insurance Provider"),
+                                    TextSpan(
+                                      text: ' *',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              SizedBox(
+                                width: 170,
+                                child: Theme(
+                                  data: ThemeData(fontFamily: 'ArchivoNarrow'),
+                                  child: TextFormField(
+                                    style: const TextStyle(fontSize: 16.0),
+                                    cursorColor:
+                                        const Color.fromRGBO(0, 61, 121, 1),
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color.fromRGBO(0, 61, 121, 1),
+                                          width: 2.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(width: 30),
+                          Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                RichText(
-                                  text: const TextSpan(
-                                    style: TextStyle(
-                                      fontFamily: 'ArchivoNarrow',
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                    children: [
-                                      TextSpan(text: "Licence Plate"),
-                                      TextSpan(
-                                        text: ' *',
-                                        style: TextStyle(color: Colors.red),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 80.0),
+                                  child: RichText(
+                                    text: const TextSpan(
+                                      style: TextStyle(
+                                        fontFamily: 'ArchivoNarrow',
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
                                       ),
-                                    ],
+                                      children: [
+                                        TextSpan(
+                                          text: "Policy Number",
+                                        ),
+                                        TextSpan(
+                                          text: ' *',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 10),
                                 SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.15,
+                                  width: 170,
                                   child: Theme(
                                     data:
                                         ThemeData(fontFamily: 'ArchivoNarrow'),
@@ -262,9 +381,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
+                              ]),
                         ],
                       ),
                       const SizedBox(height: 40),
@@ -298,8 +415,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 170,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -323,7 +439,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 20),
+                                const SizedBox(width: 30),
                                 Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -354,9 +470,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                       ),
                                       const SizedBox(height: 10),
                                       SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.15,
+                                        width: 170,
                                         child: Theme(
                                           data: ThemeData(
                                               fontFamily: 'ArchivoNarrow'),
@@ -379,20 +493,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                         ),
                                       ),
                                     ]),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 40),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                                const SizedBox(width: 30),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -415,8 +516,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 170,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -440,7 +540,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 20),
+                                const SizedBox(width: 30),
                                 Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -471,126 +571,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                       ),
                                       const SizedBox(height: 10),
                                       SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.15,
-                                        child: Theme(
-                                          data: ThemeData(
-                                              fontFamily: 'ArchivoNarrow'),
-                                          child: TextFormField(
-                                            style:
-                                                const TextStyle(fontSize: 16.0),
-                                            cursorColor: const Color.fromRGBO(
-                                                0, 61, 121, 1),
-                                            decoration: const InputDecoration(
-                                              border: OutlineInputBorder(),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color.fromRGBO(
-                                                      0, 61, 121, 1),
-                                                  width: 2.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 40),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    RichText(
-                                      text: const TextSpan(
-                                        style: TextStyle(
-                                          fontFamily: 'ArchivoNarrow',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        ),
-                                        children: [
-                                          TextSpan(text: "Insurance Provider"),
-                                          TextSpan(
-                                            text: ' *',
-                                            style: TextStyle(color: Colors.red),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
-                                      child: Theme(
-                                        data: ThemeData(
-                                            fontFamily: 'ArchivoNarrow'),
-                                        child: TextFormField(
-                                          style:
-                                              const TextStyle(fontSize: 16.0),
-                                          cursorColor: const Color.fromRGBO(
-                                              0, 61, 121, 1),
-                                          decoration: const InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                color: Color.fromRGBO(
-                                                    0, 61, 121, 1),
-                                                width: 2.0,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(width: 20),
-                                Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 80.0),
-                                        child: RichText(
-                                          text: const TextSpan(
-                                            style: TextStyle(
-                                              fontFamily: 'ArchivoNarrow',
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black,
-                                            ),
-                                            children: [
-                                              TextSpan(
-                                                text: "Policy Number",
-                                              ),
-                                              TextSpan(
-                                                text: ' *',
-                                                style: TextStyle(
-                                                    color: Colors.red),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 10),
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.15,
+                                        width: 170,
                                         child: Theme(
                                           data: ThemeData(
                                               fontFamily: 'ArchivoNarrow'),
@@ -626,7 +607,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                           style: TextStyle(
                             fontFamily: 'ArchivoNarrow',
                             fontWeight: FontWeight.bold,
-                            fontSize: 24.0,
+                            fontSize: 23.0,
                           ),
                         ),
                       ),
@@ -685,9 +666,22 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                 children: [
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage01,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage01 = value ?? false;
+                                        });
                                       },
                                     ),
                                     title: const Text(
@@ -700,12 +694,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage02,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage02 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '02 - Right Front',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -715,12 +722,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage03,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage03 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '03 - Right Centre',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -730,12 +750,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage04,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage04 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '04 - Right Rear',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -745,12 +778,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage05,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage05 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '05 - Right Rear Corner',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -760,12 +806,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage06,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage06 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '06 - Back Centre',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -775,12 +834,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage07,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage07 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '07 - Left Rear Corner',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -790,12 +862,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage08,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage08 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '08 - Left Rear',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -805,12 +890,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage09,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage09 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '09 - Left Centre',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -830,12 +928,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                 children: [
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage10,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage10 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '10 - Left Front',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -845,12 +956,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage11,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage11 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '11 - Left Front Corner',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -860,12 +984,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage12,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage12 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '12 - Front Centre',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -875,12 +1012,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage13,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage13 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '13 - Front Complete',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -890,12 +1040,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage14,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage14 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '14 - Right Side Complete',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -905,12 +1068,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage15,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage15 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '15 - Back Complete',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -920,12 +1096,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage16,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage16 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '16 - Left Side Complete',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -935,12 +1124,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage17,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage17 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '17 - Top (not pictured)',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -950,12 +1152,25 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                   ),
                                   ListTile(
                                     leading: Checkbox(
-                                      value: false,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                        (Set states) {
+                                          if (states.contains(
+                                              MaterialState.selected)) {
+                                            return Color.fromRGBO(
+                                                0, 61, 121, 1);
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      value: vehicleDamage18,
                                       onChanged: (bool? value) {
-                                        // Handle checkbox state change
+                                        setState(() {
+                                          vehicleDamage18 = value ?? false;
+                                        });
                                       },
                                     ),
-                                    title: Text(
+                                    title: const Text(
                                       '18 - Undercarriage (not pictured)',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -1032,7 +1247,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                               ),
                             ),
                             const Text('Yes'),
-                            const SizedBox(width: 20),
+                            const SizedBox(width: 30),
                             Theme(
                               data: ThemeData(
                                 unselectedWidgetColor: Colors.grey,
@@ -1100,9 +1315,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                       ),
                                       const SizedBox(height: 10),
                                       SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.15,
+                                        width: 200,
                                         child: Theme(
                                           data: ThemeData(
                                               fontFamily: 'ArchivoNarrow'),
@@ -1156,9 +1369,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                       ),
                                       const SizedBox(height: 10),
                                       SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.15,
+                                        width: 200,
                                         child: Theme(
                                           data: ThemeData(
                                               fontFamily: 'ArchivoNarrow'),
@@ -1244,7 +1455,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                               ),
                             ),
                             const Text('Yes'),
-                            const SizedBox(width: 20),
+                            const SizedBox(width: 30),
                             Theme(
                               data: ThemeData(
                                 unselectedWidgetColor: Colors.grey,
@@ -1311,9 +1522,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                       ),
                                       const SizedBox(height: 10),
                                       SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.15,
+                                        width: 200,
                                         child: Theme(
                                           data: ThemeData(
                                               fontFamily: 'ArchivoNarrow'),
@@ -1366,9 +1575,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                       ),
                                       const SizedBox(height: 10),
                                       SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.15,
+                                        width: 200,
                                         child: Theme(
                                           data: ThemeData(
                                               fontFamily: 'ArchivoNarrow'),

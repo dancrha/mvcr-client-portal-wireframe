@@ -24,6 +24,8 @@ class _AcknowledgementState extends State<Acknowledgement> {
   int _currentValue = 0; // You can set any default value
   bool _isButtonEnabled = true;
 
+  bool isChecked = false;
+
   @override
   void initState() {
     super.initState();
@@ -133,6 +135,70 @@ class _AcknowledgementState extends State<Acknowledgement> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 40),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 80.0),
+                        child: Text(
+                          'Please read and check to indicate you understand before submitting your request for a report:\n',
+                          style: TextStyle(
+                            fontFamily: 'ArchivoNarrow',
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 100, right: 80),
+                        child: Text(
+                          '• I understand that prior to being issued a collision report number, I may receive a callback from a York Regional Police officer with follow-up questions to confirm accuracy and/or to ensure the legal requirements for self-reporting have been met.\n\n'
+                          '• I understand that it is a crime in Canada to lie to the police or mislead them in an investigation. It is also a crime in Canada to falsely accuse another person of committing a crime.\n\n'
+                          '• I understand that if my incident involves a criminal or provincial offence, the information submitted herein may be used as evidence in court.\n\n'
+                          '• I understand that police are not responsible for determining driver fault, and that according to Ontario Regulation 668 under the Insurance Act, Fault Determination Rules allow insurance companies to decide which driver is at fault, and to what degree.\n',
+                          style: TextStyle(
+                            fontFamily: 'ArchivoNarrow',
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 80, right: 80),
+                        child: Text(
+                          '• By checking this box, I hereby certify that, to the best of my knowledge, the provided information is true and accurate.',
+                          style: TextStyle(
+                              fontFamily: 'ArchivoNarrow',
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 80),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: Checkbox(
+                            fillColor: MaterialStateProperty.resolveWith(
+                              (Set states) {
+                                if (states.contains(MaterialState.selected)) {
+                                  return Color.fromRGBO(0, 61, 121, 1);
+                                }
+                                return null;
+                              },
+                            ),
+                            value: isChecked,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isChecked = value ?? false;
+                              });
+                            },
+                          ),
+                          title: const Text(
+                            'Yes, I understand',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16.0,
+                                fontFamily: 'ArchivoNarrow'),
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 80),
                       Row(
                         children: [
@@ -208,8 +274,8 @@ class _AcknowledgementState extends State<Acknowledgement> {
                             padding:
                                 const EdgeInsets.only(right: 40, bottom: 20),
                             child: Container(
-                              width: 130,
-                              height: 45,
+                              width: 170,
+                              height: 50,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(40.0),
                                 boxShadow: [
@@ -246,10 +312,15 @@ class _AcknowledgementState extends State<Acknowledgement> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
+                                    Icon(
+                                      Icons.done,
+                                      size: 23,
+                                      color: Colors.white,
+                                    ),
                                     Padding(
-                                      padding: EdgeInsets.only(left: 10),
+                                      padding: EdgeInsets.only(left: 6),
                                       child: Text(
-                                        'Continue',
+                                        'Submit Form',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 17.0,
@@ -257,11 +328,6 @@ class _AcknowledgementState extends State<Acknowledgement> {
                                         ),
                                       ),
                                     ),
-                                    Icon(
-                                      Icons.navigate_next,
-                                      size: 22,
-                                      color: Colors.white,
-                                    )
                                   ],
                                 ),
                               ),

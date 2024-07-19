@@ -103,6 +103,8 @@ class _DriverInformationState extends State<DriverInformation> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(90.0),
@@ -160,8 +162,9 @@ class _DriverInformationState extends State<DriverInformation> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       const SizedBox(height: 20),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 80.0),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: Text(
                           'Reporting Driver Information',
                           style: TextStyle(
@@ -173,9 +176,9 @@ class _DriverInformationState extends State<DriverInformation> {
                       ),
                       const SizedBox(height: 20),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.5,
                           child: RichText(
                             text: const TextSpan(
                               style: TextStyle(
@@ -199,8 +202,9 @@ class _DriverInformationState extends State<DriverInformation> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 80.0),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: Text(
                           'Please provide information about the reporting driver.',
                           style: TextStyle(
@@ -211,12 +215,13 @@ class _DriverInformationState extends State<DriverInformation> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 50),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth > 600 ? 80.0 : 20.0),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -242,8 +247,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 200,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -292,8 +296,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 200,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -340,8 +343,8 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15, // Adjust this value to change the width of the field
+                                      width:
+                                          200, // Adjust this value to change the width of the field
                                       child: GestureDetector(
                                         onTap: () => _selectDate(context),
                                         child: AbsorbPointer(
@@ -367,12 +370,13 @@ class _DriverInformationState extends State<DriverInformation> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 50),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
+                            padding: EdgeInsets.only(
+                                left: screenWidth > 600 ? 80.0 : 20.0),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -399,8 +403,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.175,
+                                      width: 300,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -426,7 +429,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 20),
+                                const SizedBox(width: 20),
                                 Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -458,10 +461,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                       ),
                                       const SizedBox(height: 10),
                                       SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.15,
+                                          width: 300,
                                           child: DropdownButtonFormField(
                                             value: _provinceOrState,
                                             items: [
@@ -571,12 +571,13 @@ class _DriverInformationState extends State<DriverInformation> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 50),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
+                            padding: EdgeInsets.only(
+                                left: screenWidth > 600 ? 80.0 : 20.0),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -602,8 +603,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
+                                      width: 300,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -627,13 +627,13 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                     width:
                                         20), // Adjust this value to control the space between fields
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       style: TextStyle(
                                         fontFamily: 'ArchivoNarrow',
                                         fontSize: 16.0,
@@ -644,8 +644,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.1,
+                                      width: 100,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -674,12 +673,13 @@ class _DriverInformationState extends State<DriverInformation> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 50),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
+                            padding: EdgeInsets.only(
+                                left: screenWidth > 600 ? 80.0 : 20.0),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -705,8 +705,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 200,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -755,8 +754,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 200,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -806,8 +804,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 200,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -836,12 +833,13 @@ class _DriverInformationState extends State<DriverInformation> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 50),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
+                            padding: EdgeInsets.only(
+                                left: screenWidth > 600 ? 80.0 : 20.0),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -859,8 +857,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 200,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -906,8 +903,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 200,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -953,8 +949,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 200,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -988,12 +983,13 @@ class _DriverInformationState extends State<DriverInformation> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 50),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
+                            padding: EdgeInsets.only(
+                                left: screenWidth > 600 ? 80.0 : 20.0),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -1019,8 +1015,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 250,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -1070,8 +1065,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15,
+                                      width: 250,
                                       child: Theme(
                                         data: ThemeData(
                                             fontFamily: 'ArchivoNarrow'),
@@ -1100,7 +1094,7 @@ class _DriverInformationState extends State<DriverInformation> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 50),
                       const Padding(
                         padding: EdgeInsets.only(left: 80.0),
                         child: Text(
@@ -1115,9 +1109,10 @@ class _DriverInformationState extends State<DriverInformation> {
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.3,
+                          width: 350,
                           child: DropdownButtonFormField(
                             value: _collisionAction,
                             items: [
@@ -1227,7 +1222,8 @@ class _DriverInformationState extends State<DriverInformation> {
                       },
                       const SizedBox(height: 40),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80.0),
+                        padding: EdgeInsets.only(
+                            left: screenWidth > 600 ? 80.0 : 20.0),
                         child: RichText(
                           text: const TextSpan(
                             style: TextStyle(
@@ -1250,7 +1246,8 @@ class _DriverInformationState extends State<DriverInformation> {
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [

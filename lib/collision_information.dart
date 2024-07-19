@@ -142,6 +142,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(90.0),
@@ -199,8 +201,9 @@ class _CollisionInformationState extends State<CollisionInformation> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       const SizedBox(height: 20),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 80.0),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: Text(
                           'Collision Information',
                           style: TextStyle(
@@ -212,7 +215,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 20),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: RichText(
@@ -238,8 +242,9 @@ class _CollisionInformationState extends State<CollisionInformation> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 80.0),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: Text(
                           'Tell us some more specific details about the collision. Please provide all answers to the best of your knowledge.',
                           style: TextStyle(
@@ -251,7 +256,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 40),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: RichText(
                           text: const TextSpan(
                             style: TextStyle(
@@ -276,8 +282,9 @@ class _CollisionInformationState extends State<CollisionInformation> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 80.0),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: Text(
                             'Enter the location manually or select the location on the map.',
                             style: TextStyle(
@@ -288,7 +295,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 20),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: SizedBox(
                           width: 300,
                           child: Theme(
@@ -314,7 +322,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       Container(
                         height: 400,
                         width: 600,
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: Stack(
                           children: [
                             FlutterMap(
@@ -421,7 +430,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                             .start, // This aligns children to the start (left) of the column
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth > 600 ? 80.0 : 20.0),
                             child: RichText(
                               text: const TextSpan(
                                 style: TextStyle(
@@ -447,7 +457,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                               height:
                                   20), // Add some space between the text and the number picker
                           Padding(
-                            padding: const EdgeInsets.only(left: 80.0),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth > 600 ? 80.0 : 20.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -494,7 +505,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 40),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: RichText(
                           text: const TextSpan(
                             style: TextStyle(
@@ -518,7 +530,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: SizedBox(
                             width: 400,
                             child: DropdownButtonFormField(
@@ -565,7 +578,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 40),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: RichText(
                           text: const TextSpan(
                             style: TextStyle(
@@ -589,7 +603,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: SizedBox(
                             width: 400,
                             child: DropdownButtonFormField(
@@ -631,7 +646,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 40),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: RichText(
                           text: const TextSpan(
                             style: TextStyle(
@@ -655,7 +671,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: SizedBox(
                             width: 400,
                             child: DropdownButtonFormField(
@@ -702,7 +719,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 40),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: RichText(
                           text: const TextSpan(
                             style: TextStyle(
@@ -726,7 +744,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: SizedBox(
                             width: 400,
                             child: DropdownButtonFormField(
@@ -768,7 +787,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 40),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: RichText(
                           text: const TextSpan(
                             style: TextStyle(
@@ -792,7 +812,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -856,7 +877,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 40),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: RichText(
                           text: const TextSpan(
                             style: TextStyle(
@@ -880,7 +902,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: SizedBox(
                             width: 400,
                             child: DropdownButtonFormField(
@@ -922,7 +945,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 40),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: RichText(
                           text: const TextSpan(
                             style: TextStyle(
@@ -945,7 +969,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -1049,7 +1074,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                     maxLines: null, // Allows for multiple lines
                                     minLines:
                                         4, // Sets a minimum height of 4 lines
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       border: OutlineInputBorder(),
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
@@ -1073,7 +1098,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       },
                       const SizedBox(height: 40),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: RichText(
                           text: const TextSpan(
                             style: TextStyle(
@@ -1097,7 +1123,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                       ),
                       const SizedBox(height: 10),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth > 600 ? 80.0 : 20.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
