@@ -47,6 +47,7 @@ dependencies:
   latlong2: ^0.8.2
   geolocator: ^11.1.0
   flutter_multi_formatter: ^2.13.0
+  provider: ^6.1.2
 
 
 dev_dependencies:
@@ -91,6 +92,16 @@ flutter:
         - asset: assets/fonts/ArchivoNarrow-BoldItalic.ttf
           weight: 700
           style: italic
+          
+    - family: Univers
+      fonts:
+        - asset: assets/fonts/Univers.ttf
+          weight: 700
+    - family: Helvetica
+      fonts:
+        - asset: assets/fonts/HelveticaNeueMedium.otf
+          weight: 700      
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

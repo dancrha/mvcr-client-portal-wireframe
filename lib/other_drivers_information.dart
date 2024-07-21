@@ -112,10 +112,6 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                       'assets/images/logo-yrp.png',
                     ),
                   ),
-                  const SizedBox(width: 20),
-                  Text(screenWidth.toString(),
-                      style: const TextStyle(
-                          color: Colors.white)) // Adjust spacing as needed
                 ],
               ),
             ),

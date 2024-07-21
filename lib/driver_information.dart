@@ -36,6 +36,8 @@ class _DriverInformationState extends State<DriverInformation> {
   String? _driverInfo;
   int _currentValue = 1; // You can set any default value
   bool _isButtonEnabled = true;
+  double fontSize = 16.0;
+  double headerFontSize = 32.0;
 
   @override
   void initState() {
@@ -47,6 +49,15 @@ class _DriverInformationState extends State<DriverInformation> {
 
   void _validateInput() {
     setState(() {});
+  }
+
+  void setFontSize(double size, double headerSize) {
+    if (size > 12 && size < 20 && headerSize > 28 && headerSize < 36) {
+      setState(() {
+        fontSize = size;
+        headerFontSize = headerSize;
+      });
+    }
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -194,10 +205,10 @@ class _DriverInformationState extends State<DriverInformation> {
                               const SizedBox(height: 20),
                               SizedBox(
                                 child: RichText(
-                                  text: const TextSpan(
+                                  text: TextSpan(
                                     style: TextStyle(
                                       fontFamily: 'ArchivoNarrow',
-                                      fontSize: 16.0,
+                                      fontSize: fontSize,
                                       color: Colors
                                           .black, // Set default color for text
                                     ),
@@ -215,29 +226,29 @@ class _DriverInformationState extends State<DriverInformation> {
                                 ),
                               ),
                               const SizedBox(height: 20),
-                              const Text(
+                              Text(
                                 'Please provide information about the reporting driver.',
                                 style: TextStyle(
                                   fontFamily: 'ArchivoNarrow',
                                   //fontWeight: FontWeight.bold,
-                                  fontSize: 16.0,
+                                  fontSize: fontSize,
                                   color: Colors.black,
                                 ),
                               ),
                               const SizedBox(height: 50),
                               Wrap(
                                 spacing: 20,
-                                runSpacing: 20,
+                                runSpacing: 30,
                                 children: [
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           style: TextStyle(
                                             fontFamily: 'ArchivoNarrow',
-                                            fontSize: 16.0,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
@@ -259,7 +270,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -282,10 +293,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           style: TextStyle(
                                             fontFamily: 'ArchivoNarrow',
-                                            fontSize: 16.0,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
@@ -307,7 +318,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -330,10 +341,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           style: TextStyle(
                                             fontFamily: 'ArchivoNarrow',
-                                            fontSize: 16.0,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
@@ -373,20 +384,20 @@ class _DriverInformationState extends State<DriverInformation> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: isMobile ? 20 : 40),
+                              SizedBox(height: isMobile ? 30 : 40),
                               Wrap(
                                 spacing: 20,
-                                runSpacing: 20,
+                                runSpacing: 30,
                                 children: [
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           style: TextStyle(
                                             fontFamily: 'ArchivoNarrow',
-                                            fontSize: 16.0,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
@@ -410,7 +421,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -435,10 +446,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         RichText(
-                                          text: const TextSpan(
+                                          text: TextSpan(
                                             style: TextStyle(
                                               fontFamily: 'ArchivoNarrow',
-                                              fontSize: 16.0,
+                                              fontSize: fontSize,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black,
                                             ),
@@ -530,10 +541,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                                   value: value,
                                                   child: Text(
                                                     value,
-                                                    style: const TextStyle(
+                                                    style: TextStyle(
                                                       fontFamily:
                                                           'ArchivoNarrow',
-                                                      fontSize: 16.0,
+                                                      fontSize: fontSize,
                                                     ),
                                                   ),
                                                 );
@@ -566,7 +577,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                       ]),
                                 ],
                               ),
-                              SizedBox(height: isMobile ? 20 : 40),
+                              SizedBox(height: isMobile ? 30 : 40),
                               Wrap(
                                 spacing: 20,
                                 runSpacing: 20,
@@ -576,10 +587,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           style: TextStyle(
                                             fontFamily: 'ArchivoNarrow',
-                                            fontSize: 16.0,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
@@ -601,7 +612,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -623,10 +634,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
+                                      Text(
                                         style: TextStyle(
                                           fontFamily: 'ArchivoNarrow',
-                                          fontSize: 16.0,
+                                          fontSize: fontSize,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
                                         ),
@@ -640,7 +651,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -660,20 +671,20 @@ class _DriverInformationState extends State<DriverInformation> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: isMobile ? 20 : 40),
+                              SizedBox(height: isMobile ? 30 : 40),
                               Wrap(
                                 spacing: 20,
-                                runSpacing: 20,
+                                runSpacing: 30,
                                 children: [
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           style: TextStyle(
                                             fontFamily: 'ArchivoNarrow',
-                                            fontSize: 16.0,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
@@ -695,7 +706,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -718,10 +729,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           style: TextStyle(
                                             fontFamily: 'ArchivoNarrow',
-                                            fontSize: 16.0,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
@@ -743,7 +754,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -766,10 +777,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           style: TextStyle(
                                             fontFamily: 'ArchivoNarrow',
-                                            fontSize: 16.0,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
@@ -792,7 +803,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -812,19 +823,19 @@ class _DriverInformationState extends State<DriverInformation> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: isMobile ? 20 : 40),
+                              SizedBox(height: isMobile ? 30 : 40),
                               Wrap(
                                 spacing: 20,
-                                runSpacing: 20,
+                                runSpacing: 30,
                                 children: [
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
+                                      Text(
                                         style: TextStyle(
                                           fontFamily: 'ArchivoNarrow',
-                                          fontSize: 16.0,
+                                          fontSize: fontSize,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
                                         ),
@@ -838,7 +849,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -865,10 +876,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
+                                      Text(
                                         style: TextStyle(
                                           fontFamily: 'ArchivoNarrow',
-                                          fontSize: 16.0,
+                                          fontSize: fontSize,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
                                         ),
@@ -882,7 +893,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -909,10 +920,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
+                                      Text(
                                         style: TextStyle(
                                           fontFamily: 'ArchivoNarrow',
-                                          fontSize: 16.0,
+                                          fontSize: fontSize,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
                                         ),
@@ -926,7 +937,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -951,20 +962,20 @@ class _DriverInformationState extends State<DriverInformation> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: isMobile ? 20 : 40),
+                              SizedBox(height: isMobile ? 30 : 40),
                               Wrap(
                                 spacing: 20,
-                                runSpacing: 20,
+                                runSpacing: 30,
                                 children: [
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           style: TextStyle(
                                             fontFamily: 'ArchivoNarrow',
-                                            fontSize: 16.0,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
@@ -986,7 +997,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -1009,10 +1020,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       RichText(
-                                        text: const TextSpan(
+                                        text: TextSpan(
                                           style: TextStyle(
                                             fontFamily: 'ArchivoNarrow',
-                                            fontSize: 16.0,
+                                            fontSize: fontSize,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black,
                                           ),
@@ -1034,7 +1045,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               fontFamily: 'ArchivoNarrow'),
                                           child: TextFormField(
                                             style:
-                                                const TextStyle(fontSize: 16.0),
+                                                TextStyle(fontSize: fontSize),
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
@@ -1054,11 +1065,11 @@ class _DriverInformationState extends State<DriverInformation> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: isMobile ? 20 : 40),
-                              const Text(
+                              SizedBox(height: isMobile ? 30 : 40),
+                              Text(
                                 style: TextStyle(
                                   fontFamily: 'ArchivoNarrow',
-                                  fontSize: 16.0,
+                                  fontSize: fontSize,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
@@ -1092,9 +1103,9 @@ class _DriverInformationState extends State<DriverInformation> {
                                       value: value,
                                       child: Text(
                                         value,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontFamily: 'ArchivoNarrow',
-                                          fontSize: 16.0,
+                                          fontSize: fontSize,
                                         ),
                                       ),
                                     );
@@ -1125,10 +1136,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
+                                    Text(
                                       style: TextStyle(
                                         fontFamily: 'ArchivoNarrow',
-                                        fontSize: 16.0,
+                                        fontSize: fontSize,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
@@ -1143,8 +1154,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                         ),
                                         child: TextFormField(
                                           controller: _incidentController,
-                                          style:
-                                              const TextStyle(fontSize: 16.0),
+                                          style: TextStyle(fontSize: fontSize),
                                           cursorColor: const Color.fromRGBO(
                                               0, 61, 121, 1),
                                           maxLines:
@@ -1176,10 +1186,10 @@ class _DriverInformationState extends State<DriverInformation> {
                               },
                               const SizedBox(height: 40),
                               RichText(
-                                text: const TextSpan(
+                                text: TextSpan(
                                   style: TextStyle(
                                     fontFamily: 'ArchivoNarrow',
-                                    fontSize: 16.0,
+                                    fontSize: fontSize,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                   ),
@@ -1289,7 +1299,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                             255,
                                             1), // Light blue background
                                       ),
-                                      child: const Row(
+                                      child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -1306,7 +1316,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                               style: TextStyle(
                                                 color: Color.fromRGBO(0, 61,
                                                     121, 1), // Dark blue text
-                                                fontSize: 16.0,
+                                                fontSize: fontSize,
                                                 fontFamily: 'ArchivoNarrow',
                                                 fontWeight: FontWeight.w600,
                                               ),

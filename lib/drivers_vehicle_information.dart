@@ -1163,7 +1163,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 30),
                           RichText(
                             text: const TextSpan(
                               style: TextStyle(
