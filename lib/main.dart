@@ -3,8 +3,10 @@ import 'package:flutter_application_1/acknowledgement.dart';
 import 'package:flutter_application_1/collision_information.dart';
 import 'package:flutter_application_1/driver_information.dart';
 import 'package:flutter_application_1/drivers_statement.dart';
+import 'package:flutter_application_1/drivers_vehicle_information.dart';
 import 'package:flutter_application_1/general_information.dart';
 import 'package:flutter_application_1/other_drivers_information.dart';
+import 'package:flutter_application_1/passengers_information.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +36,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _incidentController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
   bool _isValid = true;
   bool _isButtonEnabled = true;
 
@@ -75,6 +80,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isMobile = screenWidth <= 600;
+    bool isTablet = screenWidth > 600 && screenWidth <= 800;
+    bool isDesktop = screenWidth > 800;
     return WillPopScope(
       onWillPop: () async {
         bool shouldLeave = await _showExitConfirmationDialog();
@@ -89,27 +98,32 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: const BoxDecoration(
               color: Color.fromRGBO(0, 61, 121, 1),
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 80.0),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 70,
-                    height: 70,
-                    child: Image.asset(
-                      'assets/images/logo-yrp.png',
-                    ),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 70,
+                        height: 70,
+                        child: Image.asset(
+                          'assets/images/logo-yrp.png',
+                        ),
+                      ),
+                      const SizedBox(width: 20), // Adjust spacing as needed
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
         body: LayoutBuilder(
           builder: (context, constraints) {
-            double containerWidth = constraints.maxWidth * 0.5;
+            double containerWidth = constraints.maxWidth * 0.6;
 
-            if (constraints.maxWidth < 1000) {
+            if (constraints.maxWidth < 1200) {
               containerWidth =
                   constraints.maxWidth; // Snap to screen width if less than 600
             }
@@ -119,6 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Container(
                   width: containerWidth,
                   padding: const EdgeInsets.all(20.0),
+                  margin: const EdgeInsets.all(20.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15.0),
@@ -131,13 +146,25 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ],
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      const SizedBox(height: 20),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 80.0),
-                        child: Text(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      top: 20.0,
+                      bottom: 20,
+                      left: isMobile
+                          ? 10
+                          : isTablet
+                              ? 20
+                              : 80,
+                      right: isMobile
+                          ? 10
+                          : isTablet
+                              ? 20
+                              : 80,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
                           'Welcome',
                           style: TextStyle(
                             fontFamily: 'ArchivoNarrow',
@@ -145,11 +172,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             fontSize: 42.0,
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 80.0),
-                        child: Text(
+                        const SizedBox(height: 10),
+                        const Text(
                           'Motor Vehicle Collision Report Online Form',
                           style: TextStyle(
                             fontFamily: 'ArchivoNarrow',
@@ -157,12 +181,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             fontSize: 32.0,
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 60),
-                      Center(
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 80.0, right: 80.0),
+                        const SizedBox(height: 60),
+                        Center(
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width * 0.5,
                             child: const Text(
@@ -175,11 +195,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 30),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                        const SizedBox(height: 30),
+                        Center(
                           child: SizedBox(
                             width: 300,
                             child: Theme(
@@ -209,73 +226,71 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 90),
-                      Padding(
-                          padding: const EdgeInsets.only(right: 40, bottom: 20),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Container(
-                              width: 130,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.2),
-                                    spreadRadius: 1,
-                                    blurRadius: 4,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                              child: TextButton(
-                                onPressed: _isButtonEnabled
-                                    ? () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const GeneralInformation(),
-                                          ),
-                                        );
-                                      }
-                                    : null,
-                                style: TextButton.styleFrom(
-                                  backgroundColor: _isButtonEnabled
-                                      ? const Color.fromRGBO(
-                                          0, 61, 121, 1) // Keep the blue color
-                                      : Colors.grey.withOpacity(0.5),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40.0),
-                                  ),
-                                  padding: EdgeInsets.zero,
+                        const SizedBox(height: 90),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Container(
+                            width: 130,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        'Continue',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 17.0,
-                                          fontFamily: 'ArchivoNarrow',
+                              ],
+                            ),
+                            child: TextButton(
+                              onPressed: _isButtonEnabled
+                                  ? () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const GeneralInformation(),
                                         ),
+                                      );
+                                    }
+                                  : null,
+                              style: TextButton.styleFrom(
+                                backgroundColor: _isButtonEnabled
+                                    ? const Color.fromRGBO(
+                                        0, 61, 121, 1) // Keep the blue color
+                                    : Colors.grey.withOpacity(0.5),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(40.0),
+                                ),
+                                padding: EdgeInsets.zero,
+                              ),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      'Continue',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17.0,
+                                        fontFamily: 'ArchivoNarrow',
                                       ),
                                     ),
-                                    Icon(
-                                      Icons.navigate_next,
-                                      size: 22,
-                                      color: Colors.white,
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                  Icon(
+                                    Icons.navigate_next,
+                                    size: 22,
+                                    color: Colors.white,
+                                  )
+                                ],
                               ),
                             ),
-                          )),
-                    ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
