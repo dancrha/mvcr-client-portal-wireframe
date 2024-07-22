@@ -1831,9 +1831,9 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          const Column(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 "Vehicle Damage",
                                 style: TextStyle(
@@ -2482,9 +2482,9 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                                     ),
                                     padding: EdgeInsets.zero,
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Padding(
                                         padding: EdgeInsets.only(left: 10),
                                         child: Text(

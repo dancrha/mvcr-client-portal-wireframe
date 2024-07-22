@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'MVCR Online Form',
-      home: CollisionInformation(),
+      home: Acknowledgement(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -274,9 +274,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   padding: EdgeInsets.zero,
                                 ),
-                                child: const Row(
+                                child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
+                                  children: const [
                                     Padding(
                                       padding: EdgeInsets.only(left: 10),
                                       child: Text(

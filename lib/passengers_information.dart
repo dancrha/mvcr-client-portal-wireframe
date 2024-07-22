@@ -432,9 +432,9 @@ class _PassengersInformationState extends State<PassengersInformation> {
                                     backgroundColor: const Color.fromRGBO(230,
                                         240, 255, 1), // Light blue background
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Icon(
                                         Icons.navigate_before,
                                         size: 22,
@@ -503,9 +503,9 @@ class _PassengersInformationState extends State<PassengersInformation> {
                                     ),
                                     padding: EdgeInsets.zero,
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Padding(
                                         padding: EdgeInsets.only(left: 10),
                                         child: Text(

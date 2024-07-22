@@ -13,6 +13,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
   TextEditingController _incidentController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
   TextEditingController _timeController = TextEditingController();
+  final TextEditingController _dateTimeController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -26,6 +27,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
   String? _leaveWithoutExchanging;
   String? _driverInfo;
   String? selected;
+  bool isChecked = false;
 
   bool _isButtonEnabled = true;
 
@@ -66,8 +68,10 @@ class _GeneralInformationState extends State<GeneralInformation> {
     });
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
+  Future<void> _selectDateTime(BuildContext context) async {
+    final Color customBlueColor = Color.fromRGBO(0, 61, 121, 1);
+
+    DateTime? selectedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
@@ -76,51 +80,62 @@ class _GeneralInformationState extends State<GeneralInformation> {
         return Theme(
           data: ThemeData.light().copyWith(
             colorScheme: ColorScheme.light(
-              primary: const Color.fromRGBO(
-                  0, 61, 121, 1), // header background color
-              onPrimary: Colors.white, // header text color
-              onSurface: const Color.fromRGBO(0, 61, 121, 1), // body text color
+              primary: customBlueColor,
             ),
-            dialogBackgroundColor:
-                Colors.white, // background color of the dialog
           ),
           child: child!,
         );
       },
     );
-    if (picked != null && picked != DateTime.now()) {
-      setState(() {
-        _dateController.text = "${picked.toLocal()}".split(' ')[0];
-      });
+
+    if (selectedDate != null) {
+      TimeOfDay? selectedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light().copyWith(
+              colorScheme: ColorScheme.light(
+                primary: customBlueColor,
+              ),
+            ),
+            child: child!,
+          );
+        },
+      );
+
+      if (selectedTime != null) {
+        final DateTime combinedDateTime = DateTime(
+          selectedDate.year,
+          selectedDate.month,
+          selectedDate.day,
+          selectedTime.hour,
+          selectedTime.minute,
+        );
+
+        final DateTime now = DateTime.now();
+        final DateTime threeDaysAgo = now.subtract(Duration(days: 3));
+
+        setState(() {
+          if (combinedDateTime.isBefore(threeDaysAgo)) {
+            _moreThanThreeDays = true;
+            _dateTimeController.text =
+                "${combinedDateTime.toLocal()}".split(' ')[0] +
+                    ' ' +
+                    selectedTime.format(context);
+          } else {
+            _moreThanThreeDays = false;
+            _dateTimeController.text =
+                "${combinedDateTime.toLocal()}".split(' ')[0] +
+                    ' ' +
+                    selectedTime.format(context);
+          }
+        });
+      }
     }
   }
 
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: ThemeData.light().copyWith(
-            colorScheme: ColorScheme.light(
-              primary: const Color.fromRGBO(
-                  0, 61, 121, 1), // header background color
-              onPrimary: Colors.white, // header text color
-              onSurface: const Color.fromRGBO(0, 61, 121, 1), // body text color
-            ),
-            dialogBackgroundColor:
-                Colors.white, // background color of the dialog
-          ),
-          child: child!,
-        );
-      },
-    );
-    if (picked != null) {
-      setState(() {
-        _timeController.text = picked.format(context);
-      });
-    }
-  }
+  bool _moreThanThreeDays = false;
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +143,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
     bool isMobile = screenWidth <= 600;
     bool isTablet = screenWidth > 600 && screenWidth <= 800;
     bool isDesktop = screenWidth > 800;
+
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(90.0),
@@ -200,29 +216,32 @@ class _GeneralInformationState extends State<GeneralInformation> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'General Information',
-                            style: TextStyle(
-                              fontFamily: 'ArchivoNarrow',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 32.0,
-                            ),
-                          ),
-                          const SizedBox(height: 30),
                           Center(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black, // Border color
-                                  width: 1,
+                              child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 3,
+                                  offset: const Offset(0, 2),
                                 ),
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10.0, vertical: 20),
+                              ],
+                              color: const Color.fromRGBO(
+                                  230, 240, 255, 1), // Blue background color
+                              // border: Border.all(
+                              //   color: Colors.black, // Border color
+                              //   width: 1,
+                              // ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 30.0, vertical: 20),
+                              child: IntrinsicWidth(
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
+                                  children: const [
                                     Icon(
                                       Icons.campaign,
                                       size: 30,
@@ -234,18 +253,29 @@ class _GeneralInformationState extends State<GeneralInformation> {
                                       child: Text(
                                         'Please answer the following questions to determine if your collision may be reported online.',
                                         style: TextStyle(
-                                            fontFamily: 'ArchivoNarrow',
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20.0,
-                                            color: Colors.black),
+                                          fontFamily: 'ArchivoNarrow',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20.0,
+                                          color: Colors
+                                              .black, // Change text color to white for better contrast
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
                             ),
-                          ),
+                          )),
                           const SizedBox(height: 40),
+                          const Text(
+                            'General Information',
+                            style: TextStyle(
+                              fontFamily: 'ArchivoNarrow',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 32.0,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
                           RichText(
                             text: const TextSpan(
                               style: TextStyle(
@@ -361,8 +391,8 @@ class _GeneralInformationState extends State<GeneralInformation> {
                           ),
                           if (_hasCompletedReport == 'Yes') ...{
                             const SizedBox(height: 20),
-                            const Row(
-                              children: [
+                            Row(
+                              children: const [
                                 Icon(
                                   Icons.report,
                                   color: Color.fromARGB(255, 190, 44, 33),
@@ -459,8 +489,8 @@ class _GeneralInformationState extends State<GeneralInformation> {
                           ),
                           if (_selectedMunicipality == 'Other') ...{
                             const SizedBox(height: 20),
-                            const Row(
-                              children: [
+                            Row(
+                              children: const [
                                 Icon(
                                   Icons.report,
                                   color: Color.fromARGB(255, 190, 44, 33),
@@ -502,60 +532,119 @@ class _GeneralInformationState extends State<GeneralInformation> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 10),
-                          Wrap(
-                            spacing: 20,
-                            runSpacing: 20,
-                            children: [
-                              SizedBox(
-                                width: 200,
-                                child: GestureDetector(
-                                  onTap: () => _selectDate(context),
-                                  child: AbsorbPointer(
-                                    child: TextFormField(
-                                      controller: _dateController,
-                                      decoration: const InputDecoration(
-                                        labelText: 'Date of Collision',
-                                        border: OutlineInputBorder(),
-                                        labelStyle: TextStyle(
-                                          fontFamily: 'Archivo Narrow',
-                                          fontSize: 14,
-                                        ),
-                                        prefixIcon: Icon(
-                                          Icons.calendar_today,
-                                        ), // Added calendar icon
-                                      ),
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: 250,
+                            child: GestureDetector(
+                              onTap: () => _selectDateTime(context),
+                              child: AbsorbPointer(
+                                child: TextFormField(
+                                  controller: _dateTimeController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Date and Time of Collision',
+                                    border: OutlineInputBorder(),
+                                    labelStyle: TextStyle(
+                                      fontFamily: 'Archivo Narrow',
+                                      fontSize: 14,
+                                    ),
+                                    prefixIcon: Icon(
+                                      Icons.calendar_today,
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 200,
-                                child: GestureDetector(
-                                  onTap: () => _selectTime(context),
-                                  child: AbsorbPointer(
-                                    child: TextFormField(
-                                      controller: _timeController,
-                                      style: const TextStyle(
-                                        fontFamily: 'Archivo Narrow',
-                                        fontSize: 16,
-                                      ),
-                                      decoration: const InputDecoration(
-                                        labelText: 'Time of Collision',
-                                        border: OutlineInputBorder(),
-                                        labelStyle: TextStyle(
-                                          fontFamily: 'Archivo Narrow',
-                                          fontSize: 14,
-                                        ),
-                                        prefixIcon: Icon(Icons
-                                            .access_time), // Added time icon
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
+                          if (_moreThanThreeDays == true) ...{
+                            const SizedBox(height: 20),
+                            IntrinsicWidth(
+                              child: Container(
+                                padding: const EdgeInsets.all(20.0),
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(
+                                      255, 240, 240, 240), // Light orange color
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      spreadRadius: 1,
+                                      blurRadius: 3,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: const [
+                                        Icon(
+                                          Icons.warning,
+                                          color: Color.fromRGBO(240, 156, 0, 1),
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'Collision occurred more than 72 hours ago. This submission is subject to officer discretion. ',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'ArchivoNarrow',
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 10),
+                                    ListTile(
+                                      contentPadding: EdgeInsets.zero,
+                                      leading: Checkbox(
+                                        fillColor:
+                                            MaterialStateProperty.resolveWith(
+                                          (Set states) {
+                                            if (states.contains(
+                                                MaterialState.selected)) {
+                                              return Color.fromRGBO(
+                                                  0, 61, 121, 1);
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                        value: isChecked,
+                                        onChanged: (bool? value) {
+                                          setState(() {
+                                            isChecked = value ?? false;
+                                          });
+                                        },
+                                      ),
+                                      title: RichText(
+                                        text: const TextSpan(
+                                          style: TextStyle(
+                                            fontFamily: 'ArchivoNarrow',
+                                            fontSize: 16.0,
+                                            color: Colors
+                                                .black, // Set default color for text
+                                          ),
+                                          children: [
+                                            TextSpan(text: 'I understand.'),
+                                            TextSpan(
+                                              text: ' *',
+                                              style:
+                                                  TextStyle(color: Colors.red),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          },
                           const SizedBox(height: 40),
                           RichText(
                             text: const TextSpan(
@@ -642,8 +731,8 @@ class _GeneralInformationState extends State<GeneralInformation> {
                           ),
                           if (_400series == 'Yes') ...{
                             const SizedBox(height: 20),
-                            const Row(
-                              children: [
+                            Row(
+                              children: const [
                                 Icon(
                                   Icons.report,
                                   color: Color.fromARGB(255, 190, 44, 33),
@@ -775,10 +864,10 @@ class _GeneralInformationState extends State<GeneralInformation> {
                           ),
                           if (_anyInjuries == 'Yes') ...{
                             const SizedBox(height: 20),
-                            const Row(
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment
                                   .start, // Align items to the top
-                              children: [
+                              children: const [
                                 Icon(
                                   Icons.report,
                                   color: Color.fromARGB(255, 190, 44, 33),
@@ -825,11 +914,11 @@ class _GeneralInformationState extends State<GeneralInformation> {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 20.0),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                              children: const [
                                 Text(
                                   '• Buses (School, Public, Commercial)',
                                   style: TextStyle(
@@ -947,10 +1036,10 @@ class _GeneralInformationState extends State<GeneralInformation> {
                           ),
                           if (_vehiclesInvolved == 'Yes') ...{
                             const SizedBox(height: 20),
-                            const Row(
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment
                                   .start, // Align items to the top
-                              children: [
+                              children: const [
                                 Icon(
                                   Icons.report,
                                   color: Color.fromARGB(255, 190, 44, 33),
@@ -1060,10 +1149,10 @@ class _GeneralInformationState extends State<GeneralInformation> {
                           ),
                           if (_anyPedCycInvolved == 'Yes') ...{
                             const SizedBox(height: 20),
-                            const Row(
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment
                                   .start, // Align items to the top
-                              children: [
+                              children: const [
                                 Icon(
                                   Icons.report,
                                   color: Color.fromARGB(255, 190, 44, 33),
@@ -1259,10 +1348,10 @@ class _GeneralInformationState extends State<GeneralInformation> {
                           },
                           if (_driverInfo == 'Yes') ...{
                             const SizedBox(height: 20),
-                            const Row(
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment
                                   .start, // Align items to the top
-                              children: [
+                              children: const [
                                 Icon(
                                   Icons.report,
                                   color: Color.fromARGB(255, 190, 44, 33),
@@ -1315,9 +1404,9 @@ class _GeneralInformationState extends State<GeneralInformation> {
                                     backgroundColor: const Color.fromRGBO(230,
                                         240, 255, 1), // Light blue background
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Icon(
                                         Icons.navigate_before,
                                         size: 22,
@@ -1391,10 +1480,10 @@ class _GeneralInformationState extends State<GeneralInformation> {
                                       ),
                                       padding: EdgeInsets.zero,
                                     ),
-                                    child: const Row(
+                                    child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         Padding(
                                           padding: EdgeInsets.only(left: 10),
                                           child: Text(

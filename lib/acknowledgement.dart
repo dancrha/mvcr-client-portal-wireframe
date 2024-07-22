@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:signature/signature.dart';
 
 class Acknowledgement extends StatefulWidget {
   const Acknowledgement({super.key});
@@ -10,7 +10,11 @@ class Acknowledgement extends StatefulWidget {
 
 class _AcknowledgementState extends State<Acknowledgement> {
   TextEditingController _dateController = TextEditingController();
-
+  final SignatureController _signatureController = SignatureController(
+    penStrokeWidth: 2,
+    penColor: Colors.black,
+    exportBackgroundColor: Colors.white,
+  );
   final _formKey = GlobalKey<FormState>();
 
   bool _isValid = true;
@@ -173,12 +177,25 @@ class _AcknowledgementState extends State<Acknowledgement> {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          const Text(
-                            '• By checking this box, I hereby certify that, to the best of my knowledge, the provided information is true and accurate.',
-                            style: TextStyle(
+                          RichText(
+                            text: const TextSpan(
+                              style: TextStyle(
                                 fontFamily: 'ArchivoNarrow',
-                                fontSize: 17.0,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text:
+                                      'By checking this box, I hereby certify that, to the best of my knowledge, the provided information is true and accurate',
+                                ),
+                                TextSpan(
+                                  text: ' *',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ],
+                            ),
                           ),
                           ListTile(
                             contentPadding: EdgeInsets.zero,
@@ -205,6 +222,78 @@ class _AcknowledgementState extends State<Acknowledgement> {
                                   fontSize: 17.0,
                                   fontFamily: 'ArchivoNarrow'),
                             ),
+                          ),
+                          const SizedBox(height: 30),
+                          RichText(
+                            text: const TextSpan(
+                              style: TextStyle(
+                                fontFamily: 'ArchivoNarrow',
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text: 'Signature',
+                                ),
+                                TextSpan(
+                                  text: ' *',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 500, // Adjust the width as needed
+                                height: 150, // Adjust the height as needed
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Signature(
+                                  controller: _signatureController,
+                                  backgroundColor: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                  height:
+                                      10), // Add some space between the signature box and the button
+                              Container(
+                                width:
+                                    500, // Match the width of the signature container
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .end, // Align the button to the right
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        _signatureController.clear();
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color.fromARGB(
+                                            255,
+                                            240,
+                                            240,
+                                            240), // Set button background color
+                                        elevation: 3,
+                                      ),
+                                      child: const Text(
+                                        'Clear',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'ArchivoNarrow',
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 40),
                           Row(
@@ -235,9 +324,9 @@ class _AcknowledgementState extends State<Acknowledgement> {
                                     backgroundColor: const Color.fromRGBO(230,
                                         240, 255, 1), // Light blue background
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Icon(
                                         Icons.navigate_before,
                                         size: 22,
@@ -306,9 +395,9 @@ class _AcknowledgementState extends State<Acknowledgement> {
                                     ),
                                     padding: EdgeInsets.zero,
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Icon(
                                         Icons.done,
                                         size: 23,

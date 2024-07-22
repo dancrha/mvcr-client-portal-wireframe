@@ -46,8 +46,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
   double fontSize = 16.0;
   double headerFontSize = 32.0;
 
-  LatLng _selectedLocation =
-      LatLng(43.844068, -79.431071); // Default to Toronto
+  LatLng? _selectedLocation;
   String _address = "";
   @override
   void initState() {
@@ -97,11 +96,10 @@ class _CollisionInformationState extends State<CollisionInformation> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            colorScheme: ColorScheme.light(
-              primary: const Color.fromRGBO(
-                  0, 61, 121, 1), // header background color
+            colorScheme: const ColorScheme.light(
+              primary: Color.fromRGBO(0, 61, 121, 1), // header background color
               onPrimary: Colors.white, // header text color
-              onSurface: const Color.fromRGBO(0, 61, 121, 1), // body text color
+              onSurface: Color.fromRGBO(0, 61, 121, 1), // body text color
             ),
             dialogBackgroundColor:
                 Colors.white, // background color of the dialog
@@ -124,7 +122,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
       );
       setState(() {
         _selectedLocation = LatLng(position.latitude, position.longitude);
-        _mapController.move(_selectedLocation, 15);
+        // _mapController.move(_selectedLocation, 15);
       });
     } catch (e) {
       print("Error getting location: $e");
@@ -172,7 +170,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
             width: double.infinity,
             height: 90.0,
             decoration: const BoxDecoration(
-              color: Color.fromRGBO(0, 61, 121, 1),
+              color: const Color.fromRGBO(0, 61, 121, 1),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -254,32 +252,32 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                       fontSize: headerFontSize,
                                     ),
                                   ),
-                                  Row(
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          // setFontSize(
-                                          //     fontSize - 1, headerFontSize - 1);
-                                          Provider.of<FontSizeProvider>(context,
-                                                  listen: true)
-                                              .setFontSize(fontSize - 1,
-                                                  headerFontSize - 1);
-                                        },
-                                        icon: const Icon(Icons.text_decrease),
-                                      ),
-                                      IconButton(
-                                        onPressed: () =>
-                                            Provider.of<FontSizeProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .setFontSize(fontSize + 1,
-                                                    headerFontSize + 1),
-                                        // setFontSize(
-                                        //     fontSize + 1, headerFontSize + 1),
-                                        icon: const Icon(Icons.text_increase),
-                                      ),
-                                    ],
-                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     IconButton(
+                                  //       onPressed: () {
+                                  //         // setFontSize(
+                                  //         //     fontSize - 1, headerFontSize - 1);
+                                  //         Provider.of<FontSizeProvider>(context,
+                                  //                 listen: true)
+                                  //             .setFontSize(fontSize - 1,
+                                  //                 headerFontSize - 1);
+                                  //       },
+                                  //       icon: const Icon(Icons.text_decrease),
+                                  //     ),
+                                  //     IconButton(
+                                  //       onPressed: () =>
+                                  //           Provider.of<FontSizeProvider>(
+                                  //                   context,
+                                  //                   listen: false)
+                                  //               .setFontSize(fontSize + 1,
+                                  //                   headerFontSize + 1),
+                                  //       // setFontSize(
+                                  //       //     fontSize + 1, headerFontSize + 1),
+                                  //       icon: const Icon(Icons.text_increase),
+                                  //     ),
+                                  //   ],
+                                  // ),
                                 ],
                               ),
                             ],
@@ -351,7 +349,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                             child: Theme(
                               data: ThemeData(fontFamily: 'ArchivoNarrow'),
                               child: TextFormField(
-                                controller: _locationController,
+                                //controller: _locationController,
                                 style: TextStyle(fontSize: fontSize),
                                 cursorColor:
                                     const Color.fromRGBO(0, 61, 121, 1),
@@ -359,7 +357,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                   border: OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color.fromRGBO(0, 61, 121, 1),
+                                      color:
+                                          const Color.fromRGBO(0, 61, 121, 1),
                                       width: 2.0,
                                     ),
                                   ),
@@ -369,14 +368,15 @@ class _CollisionInformationState extends State<CollisionInformation> {
                           ),
                           const SizedBox(height: 20),
                           Container(
-                            height: 400,
+                            height:
+                                450, // Adjust the height to accommodate the text below the map
                             width: 600,
                             child: Stack(
                               children: [
                                 FlutterMap(
                                   mapController: _mapController,
                                   options: MapOptions(
-                                    center: _selectedLocation,
+                                    center: LatLng(43.844068, -79.431071),
                                     zoom: 9.8,
                                     maxZoom: 18.0,
                                     onTap: (tapPosition, point) {
@@ -399,7 +399,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                         Marker(
                                           width: 80.0,
                                           height: 80.0,
-                                          point: _selectedLocation,
+                                          point: _selectedLocation ??
+                                              LatLng(43.844068, -79.431071),
                                           builder: (ctx) => const Align(
                                             alignment: Alignment.topCenter,
                                             child: Icon(
@@ -471,6 +472,20 @@ class _CollisionInformationState extends State<CollisionInformation> {
                               ],
                             ),
                           ),
+                          if (_selectedLocation != null)
+                            Container(
+                              padding:
+                                  const EdgeInsets.only(left: 8.0, top: 20),
+                              color: Colors.white,
+                              child: Text(
+                                "Selected Location: ${_selectedLocation!.latitude}, ${_selectedLocation!.longitude}",
+                                style: const TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                    fontFamily: 'ArchivoNarrow'),
+                              ),
+                            ),
+
                           const SizedBox(height: 40),
                           RichText(
                             text: TextSpan(
@@ -594,7 +609,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                   border: OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color.fromRGBO(0, 61, 121, 1),
+                                        color:
+                                            const Color.fromRGBO(0, 61, 121, 1),
                                         width: 2.0),
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
@@ -654,7 +670,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                   border: OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color.fromRGBO(0, 61, 121, 1),
+                                        color:
+                                            const Color.fromRGBO(0, 61, 121, 1),
                                         width: 2.0),
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
@@ -719,7 +736,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                   border: OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color.fromRGBO(0, 61, 121, 1),
+                                        color:
+                                            const Color.fromRGBO(0, 61, 121, 1),
                                         width: 2.0),
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
@@ -779,7 +797,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                   border: OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color.fromRGBO(0, 61, 121, 1),
+                                        color:
+                                            const Color.fromRGBO(0, 61, 121, 1),
                                         width: 2.0),
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
@@ -820,7 +839,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                             Color>((Set<MaterialState> states) {
                                       if (states
                                           .contains(MaterialState.selected)) {
-                                        return Color.fromRGBO(0, 61, 121, 1);
+                                        return const Color.fromRGBO(
+                                            0, 61, 121, 1);
                                       }
                                       return Colors.grey;
                                     }),
@@ -848,7 +868,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                             Color>((Set<MaterialState> states) {
                                       if (states
                                           .contains(MaterialState.selected)) {
-                                        return Color.fromRGBO(0, 61, 121, 1);
+                                        return const Color.fromRGBO(
+                                            0, 61, 121, 1);
                                       }
                                       return Colors.grey;
                                     }),
@@ -921,7 +942,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                   border: OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color.fromRGBO(0, 61, 121, 1),
+                                        color:
+                                            const Color.fromRGBO(0, 61, 121, 1),
                                         width: 2.0),
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
@@ -962,7 +984,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                             Color>((Set<MaterialState> states) {
                                       if (states
                                           .contains(MaterialState.selected)) {
-                                        return Color.fromRGBO(0, 61, 121, 1);
+                                        return const Color.fromRGBO(
+                                            0, 61, 121, 1);
                                       }
                                       return Colors.grey;
                                     }),
@@ -990,7 +1013,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                             Color>((Set<MaterialState> states) {
                                       if (states
                                           .contains(MaterialState.selected)) {
-                                        return Color.fromRGBO(0, 61, 121, 1);
+                                        return const Color.fromRGBO(
+                                            0, 61, 121, 1);
                                       }
                                       return Colors.grey;
                                     }),
@@ -1046,7 +1070,7 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                       controller: _incidentController,
                                       style: TextStyle(fontSize: fontSize),
                                       cursorColor:
-                                          Color.fromRGBO(0, 61, 121, 1),
+                                          const Color.fromRGBO(0, 61, 121, 1),
                                       maxLines:
                                           null, // Allows for multiple lines
                                       minLines:
@@ -1055,8 +1079,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                         border: OutlineInputBorder(),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color:
-                                                Color.fromRGBO(0, 61, 121, 1),
+                                            color: const Color.fromRGBO(
+                                                0, 61, 121, 1),
                                             width: 2.0,
                                           ),
                                         ),
@@ -1107,7 +1131,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                             Color>((Set<MaterialState> states) {
                                       if (states
                                           .contains(MaterialState.selected)) {
-                                        return Color.fromRGBO(0, 61, 121, 1);
+                                        return const Color.fromRGBO(
+                                            0, 61, 121, 1);
                                       }
                                       return Colors.grey;
                                     }),
@@ -1135,7 +1160,8 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                             Color>((Set<MaterialState> states) {
                                       if (states
                                           .contains(MaterialState.selected)) {
-                                        return Color.fromRGBO(0, 61, 121, 1);
+                                        return const Color.fromRGBO(
+                                            0, 61, 121, 1);
                                       }
                                       return Colors.grey;
                                     }),
@@ -1187,19 +1213,20 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.navigate_before,
                                         size: 22,
                                         color: Color.fromRGBO(
                                             0, 61, 121, 1), // Dark blue icon
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(right: 10),
+                                        padding:
+                                            const EdgeInsets.only(right: 10),
                                         child: Text(
                                           'Back',
                                           style: TextStyle(
-                                            color: Color.fromRGBO(0, 61, 121,
-                                                1), // Dark blue text
+                                            color: const Color.fromRGBO(0, 61,
+                                                121, 1), // Dark blue text
                                             fontSize: fontSize,
                                             fontFamily: 'ArchivoNarrow',
                                             fontWeight: FontWeight.w600,
@@ -1255,9 +1282,9 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                     ),
                                     padding: EdgeInsets.zero,
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Padding(
                                         padding: EdgeInsets.only(left: 10),
                                         child: Text(

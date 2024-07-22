@@ -19,7 +19,7 @@ class _DriverInformationState extends State<DriverInformation> {
   final _formKey = GlobalKey<FormState>();
 
   bool _isValid = true;
-  String? _provinceOrState;
+  String? _provinceOrState = 'Ontario';
   String? _collisionAction;
   String? _seatbelt;
   String? _roadCondition;
@@ -616,6 +616,8 @@ class _DriverInformationState extends State<DriverInformation> {
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
+                                              hintText:
+                                                  'Eg. 47 Don Hillock Drive',
                                               border: OutlineInputBorder(),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -710,6 +712,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
+                                              hintText: 'Eg. Markham, Georgina',
                                               border: OutlineInputBorder(),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -863,7 +866,8 @@ class _DriverInformationState extends State<DriverInformation> {
                                               ),
                                             ),
                                             keyboardType: TextInputType.phone,
-                                            inputFormatters: <TextInputFormatter>[
+                                            inputFormatters: <
+                                                TextInputFormatter>[
                                               MaskedInputFormatter(
                                                   '(000) 000-0000'), // Define the phone number pattern
                                             ],
@@ -907,7 +911,8 @@ class _DriverInformationState extends State<DriverInformation> {
                                               ),
                                             ),
                                             keyboardType: TextInputType.phone,
-                                            inputFormatters: <TextInputFormatter>[
+                                            inputFormatters: <
+                                                TextInputFormatter>[
                                               MaskedInputFormatter(
                                                   '(000) 000-0000'), // Define the phone number pattern
                                             ],
@@ -951,7 +956,8 @@ class _DriverInformationState extends State<DriverInformation> {
                                               ),
                                             ),
                                             keyboardType: TextInputType.phone,
-                                            inputFormatters: <TextInputFormatter>[
+                                            inputFormatters: <
+                                                TextInputFormatter>[
                                               MaskedInputFormatter(
                                                   '(000) 000-0000'), // Define the phone number pattern
                                             ],
@@ -1372,10 +1378,10 @@ class _DriverInformationState extends State<DriverInformation> {
                                         ),
                                         padding: EdgeInsets.zero,
                                       ),
-                                      child: const Row(
+                                      child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
-                                        children: [
+                                        children: const [
                                           Padding(
                                             padding: EdgeInsets.only(left: 10),
                                             child: Text(

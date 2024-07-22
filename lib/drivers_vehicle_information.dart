@@ -288,6 +288,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
+                                              hintText: 'e.g. ABCD1234',
                                               border: OutlineInputBorder(),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -434,6 +435,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                         cursorColor:
                                             const Color.fromRGBO(0, 61, 121, 1),
                                         decoration: const InputDecoration(
+                                          hintText: 'e.g. Toyota',
                                           border: OutlineInputBorder(),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -482,6 +484,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                           cursorColor: const Color.fromRGBO(
                                               0, 61, 121, 1),
                                           decoration: const InputDecoration(
+                                            hintText: 'e.g. Corolla',
                                             border: OutlineInputBorder(),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -526,6 +529,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                         cursorColor:
                                             const Color.fromRGBO(0, 61, 121, 1),
                                         decoration: const InputDecoration(
+                                          hintText: 'e.g. 2014',
                                           border: OutlineInputBorder(),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -574,6 +578,7 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                           cursorColor: const Color.fromRGBO(
                                               0, 61, 121, 1),
                                           decoration: const InputDecoration(
+                                            hintText: 'e.g. White',
                                             border: OutlineInputBorder(),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -1581,9 +1586,9 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                     backgroundColor: const Color.fromRGBO(230,
                                         240, 255, 1), // Light blue background
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Icon(
                                         Icons.navigate_before,
                                         size: 22,
@@ -1652,9 +1657,9 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                     ),
                                     padding: EdgeInsets.zero,
                                   ),
-                                  child: const Row(
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
+                                    children: const [
                                       Padding(
                                         padding: EdgeInsets.only(left: 10),
                                         child: Text(

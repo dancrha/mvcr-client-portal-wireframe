@@ -48,6 +48,7 @@ dependencies:
   geolocator: ^11.1.0
   flutter_multi_formatter: ^2.13.0
   provider: ^6.1.2
+  signature: ^5.5.0
 
 
 dev_dependencies:
@@ -78,6 +79,7 @@ flutter:
     - assets/images/logo.png
     - assets/images/logo-yrp.png
     - assets/images/vehicle-damage.png
+    - assets/images/warning.png
 
 
 
