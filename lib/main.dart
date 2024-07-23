@@ -185,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           const SizedBox(height: 10),
                           const Text(
-                            'Motor Vehicle Collision Report Online Form',
+                            'Motor Vehicle Collision Report - Online Form',
                             style: TextStyle(
                               fontFamily: 'ArchivoNarrow',
                               fontWeight: FontWeight.bold,

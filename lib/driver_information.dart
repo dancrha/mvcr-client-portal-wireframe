@@ -617,7 +617,7 @@ class _DriverInformationState extends State<DriverInformation> {
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
                                               hintText:
-                                                  'Eg. 47 Don Hillock Drive',
+                                                  'e.g. 47 Don Hillock Drive',
                                               border: OutlineInputBorder(),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -712,7 +712,8 @@ class _DriverInformationState extends State<DriverInformation> {
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
-                                              hintText: 'Eg. Markham, Georgina',
+                                              hintText:
+                                                  'e.g. Markham, Georgina',
                                               border: OutlineInputBorder(),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
