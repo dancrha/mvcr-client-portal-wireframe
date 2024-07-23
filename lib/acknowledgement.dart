@@ -251,12 +251,17 @@ class _AcknowledgementState extends State<Acknowledgement> {
                                 width: 500, // Adjust the width as needed
                                 height: 150, // Adjust the height as needed
                                 decoration: BoxDecoration(
+                                  color: Colors
+                                      .grey, // Background color to fix the corners
                                   border: Border.all(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Signature(
-                                  controller: _signatureController,
-                                  backgroundColor: Colors.white,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Signature(
+                                    controller: _signatureController,
+                                    backgroundColor: Colors.white,
+                                  ),
                                 ),
                               ),
                               SizedBox(
