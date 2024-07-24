@@ -26,7 +26,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'MVCR Online Form',
-      home: GeneralInformation(),
+      home: MyHomePage(
+        title: '',
+      ),
       debugShowCheckedModeBanner: false,
     );
   }
