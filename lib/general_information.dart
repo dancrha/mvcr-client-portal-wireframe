@@ -16,7 +16,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
   final TextEditingController _dateTimeController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-
+  DateTime? _selectedDate;
   final bool _isValid = false;
   String? _hasCompletedReport;
   String? _selectedMunicipality;
@@ -68,7 +68,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
     });
   }
 
-  Future<void> _selectDateTime(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context) async {
     final Color customBlueColor = Color.fromRGBO(0, 61, 121, 1);
 
     DateTime? selectedDate = await showDatePicker(
@@ -89,49 +89,13 @@ class _GeneralInformationState extends State<GeneralInformation> {
     );
 
     if (selectedDate != null) {
-      TimeOfDay? selectedTime = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay.now(),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light().copyWith(
-              colorScheme: ColorScheme.light(
-                primary: customBlueColor,
-              ),
-            ),
-            child: child!,
-          );
-        },
-      );
-
-      if (selectedTime != null) {
-        final DateTime combinedDateTime = DateTime(
-          selectedDate.year,
-          selectedDate.month,
-          selectedDate.day,
-          selectedTime.hour,
-          selectedTime.minute,
-        );
-
-        final DateTime now = DateTime.now();
-        final DateTime threeDaysAgo = now.subtract(Duration(days: 3));
-
-        setState(() {
-          if (combinedDateTime.isBefore(threeDaysAgo)) {
-            _moreThanThreeDays = true;
-            _dateTimeController.text =
-                "${combinedDateTime.toLocal()}".split(' ')[0] +
-                    ' ' +
-                    selectedTime.format(context);
-          } else {
-            _moreThanThreeDays = false;
-            _dateTimeController.text =
-                "${combinedDateTime.toLocal()}".split(' ')[0] +
-                    ' ' +
-                    selectedTime.format(context);
-          }
-        });
-      }
+      setState(() {
+        _selectedDate = selectedDate; // Store the selected date
+        _dateTimeController.text =
+            selectedDate.toLocal().toString().split(' ')[0];
+        _moreThanThreeDays = DateTime.now().difference(selectedDate).inDays > 3;
+        _isButtonEnabled = true; // Enable the button if a date is selected
+      });
     }
   }
 
@@ -536,12 +500,12 @@ class _GeneralInformationState extends State<GeneralInformation> {
                           SizedBox(
                             width: 250,
                             child: GestureDetector(
-                              onTap: () => _selectDateTime(context),
+                              onTap: () => _selectDate(context),
                               child: AbsorbPointer(
                                 child: TextFormField(
                                   controller: _dateTimeController,
                                   decoration: const InputDecoration(
-                                    labelText: 'Date and Time of Collision',
+                                    labelText: 'Date of Collision',
                                     border: OutlineInputBorder(),
                                     labelStyle: TextStyle(
                                       fontFamily: 'Archivo Narrow',
@@ -555,7 +519,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
                               ),
                             ),
                           ),
-                          if (_moreThanThreeDays == true) ...{
+                          if (_moreThanThreeDays) ...{
                             const SizedBox(height: 20),
                             IntrinsicWidth(
                               child: Container(
@@ -587,7 +551,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
                                         ),
                                         Expanded(
                                           child: Text(
-                                            'Collision occurred more than 72 hours ago. This submission is subject to officer discretion. ',
+                                            'Collision occurred outside the allowed reporting period. This submission is subject to officer discretion.',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontFamily: 'ArchivoNarrow',
@@ -643,7 +607,7 @@ class _GeneralInformationState extends State<GeneralInformation> {
                                   ],
                                 ),
                               ),
-                            )
+                            ),
                           },
                           const SizedBox(height: 40),
                           RichText(
@@ -1460,13 +1424,18 @@ class _GeneralInformationState extends State<GeneralInformation> {
                                   child: TextButton(
                                     onPressed: _isButtonEnabled
                                         ? () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const CollisionInformation(),
-                                              ),
-                                            );
+                                            if (_selectedDate != null) {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CollisionInformation(
+                                                    selectedDate:
+                                                        _selectedDate!,
+                                                  ),
+                                                ),
+                                              );
+                                            }
                                           }
                                         : null,
                                     style: TextButton.styleFrom(

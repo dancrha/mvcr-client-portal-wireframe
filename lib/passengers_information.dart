@@ -240,23 +240,14 @@ class _PassengersInformationState extends State<PassengersInformation> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            RichText(
-                                              text: const TextSpan(
-                                                style: TextStyle(
-                                                  fontFamily: 'ArchivoNarrow',
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black,
-                                                ),
-                                                children: [
-                                                  TextSpan(text: "Last Name"),
-                                                  TextSpan(
-                                                    text: ' *',
-                                                    style: TextStyle(
-                                                        color: Colors.red),
-                                                  ),
-                                                ],
+                                            const Text(
+                                              style: TextStyle(
+                                                fontFamily: 'ArchivoNarrow',
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
                                               ),
+                                              'Last Name',
                                             ),
                                             const SizedBox(height: 10),
                                             SizedBox(
@@ -293,23 +284,14 @@ class _PassengersInformationState extends State<PassengersInformation> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            RichText(
-                                              text: const TextSpan(
-                                                style: TextStyle(
-                                                  fontFamily: 'ArchivoNarrow',
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black,
-                                                ),
-                                                children: [
-                                                  TextSpan(text: "First Name"),
-                                                  TextSpan(
-                                                    text: ' *',
-                                                    style: TextStyle(
-                                                        color: Colors.red),
-                                                  ),
-                                                ],
+                                            const Text(
+                                              style: TextStyle(
+                                                fontFamily: 'ArchivoNarrow',
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
                                               ),
+                                              'First Name',
                                             ),
                                             const SizedBox(height: 10),
                                             SizedBox(
@@ -346,24 +328,14 @@ class _PassengersInformationState extends State<PassengersInformation> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            RichText(
-                                              text: const TextSpan(
-                                                style: TextStyle(
-                                                  fontFamily: 'ArchivoNarrow',
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.black,
-                                                ),
-                                                children: [
-                                                  TextSpan(
-                                                      text: "Phone Number"),
-                                                  TextSpan(
-                                                    text: ' *',
-                                                    style: TextStyle(
-                                                        color: Colors.red),
-                                                  ),
-                                                ],
+                                            const Text(
+                                              style: TextStyle(
+                                                fontFamily: 'ArchivoNarrow',
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
                                               ),
+                                              'Phone Number',
                                             ),
                                             const SizedBox(height: 10),
                                             SizedBox(

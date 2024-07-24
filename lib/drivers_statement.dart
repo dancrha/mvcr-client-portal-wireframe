@@ -23,6 +23,8 @@ class _DriversStatementState extends State<DriversStatement> {
   int _currentValue = 0; // You can set any default value
   bool _isButtonEnabled = true;
   String? _otherDriverInfo;
+  bool isChecked = false;
+
   @override
   void initState() {
     super.initState();
@@ -290,6 +292,54 @@ class _DriversStatementState extends State<DriversStatement> {
                               const Text('No'),
                             ],
                           ),
+                          if (_dashcamFootage == 'Yes') ...{
+                            const SizedBox(height: 20),
+                            IntrinsicWidth(
+                              child: Container(
+                                padding: const EdgeInsets.all(20.0),
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(
+                                      255, 240, 240, 240), // Light orange color
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      spreadRadius: 1,
+                                      blurRadius: 3,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.campaign,
+                                            color: Colors.grey.shade700,
+                                            size: 34),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        const Expanded(
+                                          child: Text(
+                                            'If it is deemed that video is necessary, an officer will connect with you with instructions on how to upload your video.',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'ArchivoNarrow',
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          },
                           const SizedBox(height: 40),
                           const Text(
                             "File Uploads",

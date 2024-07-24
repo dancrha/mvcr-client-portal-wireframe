@@ -10,8 +10,9 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class CollisionInformation extends StatefulWidget {
-  const CollisionInformation({super.key});
-
+  final DateTime selectedDate;
+  const CollisionInformation({Key? key, required this.selectedDate})
+      : super(key: key);
   @override
   State<CollisionInformation> createState() => _CollisionInformationState();
 }
@@ -19,13 +20,15 @@ class CollisionInformation extends StatefulWidget {
 class _CollisionInformationState extends State<CollisionInformation> {
   TextEditingController _incidentController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
-  TextEditingController _timeController = TextEditingController();
+  final TextEditingController _fromTimeController = TextEditingController();
+  final TextEditingController _toTimeController = TextEditingController();
 
   TextEditingController _locationController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
   MapController _mapController = MapController();
+
   bool _isValid = true;
   String? _roadSurface;
   String? _roadCondition;
@@ -48,12 +51,12 @@ class _CollisionInformationState extends State<CollisionInformation> {
 
   LatLng? _selectedLocation;
   String _address = "";
+
   @override
   void initState() {
     super.initState();
     _incidentController.addListener(_validateInput);
     _dateController.addListener(_validateInput);
-    _timeController.addListener(_validateInput);
   }
 
   void _validateInput() {
@@ -129,30 +132,29 @@ class _CollisionInformationState extends State<CollisionInformation> {
     }
   }
 
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
+  Future<void> _selectTime(
+      BuildContext context, TextEditingController controller) async {
+    final Color customBlueColor = Color.fromRGBO(0, 61, 121, 1);
+
+    TimeOfDay? selectedTime = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
             colorScheme: ColorScheme.light(
-              primary: const Color.fromRGBO(
-                  0, 61, 121, 1), // header background color
-              onPrimary: Colors.white, // header text color
-              onSurface: const Color.fromRGBO(0, 61, 121, 1), // body text color
+              primary: customBlueColor,
             ),
-            dialogBackgroundColor:
-                Colors.white, // background color of the dialog
           ),
           child: child!,
         );
       },
     );
-    if (picked != null) {
-      setState(() {
-        _timeController.text = picked.format(context);
-      });
+
+    if (selectedTime != null) {
+      final localizations = MaterialLocalizations.of(context);
+      final formattedTimeOfDay = localizations.formatTimeOfDay(selectedTime);
+      controller.text = formattedTimeOfDay;
     }
   }
 
@@ -548,6 +550,182 @@ class _CollisionInformationState extends State<CollisionInformation> {
                                     if (_currentValue < 8) _currentValue++;
                                   });
                                 },
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 40),
+                          RichText(
+                            text: const TextSpan(
+                              style: TextStyle(
+                                fontFamily: 'ArchivoNarrow',
+                                fontSize:
+                                    16.0, // Replace with your desired font size
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text:
+                                      'Please indicate the time of the collision. If exact time is unknown indicate a range.',
+                                ),
+                                TextSpan(
+                                  text: ' *',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 15),
+                          IntrinsicWidth(
+                            child: Container(
+                              padding: const EdgeInsets.all(15.0),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 240, 240, 240),
+                                borderRadius: BorderRadius.circular(10.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 1,
+                                    blurRadius: 2,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.calendar_month,
+                                        color: Colors.grey.shade700,
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: RichText(
+                                          text: TextSpan(
+                                            style: const TextStyle(
+                                              fontFamily: 'ArchivoNarrow',
+                                              fontSize:
+                                                  16.0, // Replace with your desired font size
+                                              //fontWeight: FontWeight.bold,
+                                              color: Colors.black,
+                                            ),
+                                            children: [
+                                              const TextSpan(
+                                                text: 'Date of Collision:',
+                                                style: TextStyle(
+                                                    //fontWeight: FontWeight.bold,
+                                                    ),
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    " ${widget.selectedDate.toLocal().toString().split(' ')[0]}",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 15),
+                          Wrap(
+                            spacing: 20,
+                            runSpacing: 20,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RichText(
+                                    text: const TextSpan(
+                                      style: TextStyle(
+                                        fontFamily: 'ArchivoNarrow',
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: 'From:',
+                                        ),
+                                        TextSpan(
+                                          text: ' *',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  SizedBox(
+                                    width: 250,
+                                    child: GestureDetector(
+                                      onTap: () => _selectTime(
+                                          context, _fromTimeController),
+                                      child: AbsorbPointer(
+                                        child: TextFormField(
+                                          controller: _fromTimeController,
+                                          decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            labelStyle: TextStyle(
+                                              fontFamily: 'Archivo Narrow',
+                                              fontSize: 14,
+                                            ),
+                                            prefixIcon: Icon(
+                                              Icons.access_time,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    style: TextStyle(
+                                      fontFamily: 'ArchivoNarrow',
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                    'To:',
+                                  ),
+                                  const SizedBox(height: 10),
+                                  SizedBox(
+                                    width: 250,
+                                    child: GestureDetector(
+                                      onTap: () => _selectTime(
+                                          context, _toTimeController),
+                                      child: AbsorbPointer(
+                                        child: TextFormField(
+                                          controller: _toTimeController,
+                                          decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            labelStyle: TextStyle(
+                                              fontFamily: 'Archivo Narrow',
+                                              fontSize: 14,
+                                            ),
+                                            prefixIcon: Icon(
+                                              Icons.access_time,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -1322,7 +1500,6 @@ class _CollisionInformationState extends State<CollisionInformation> {
   void dispose() {
     _incidentController.dispose();
     _dateController.dispose();
-    _timeController.dispose();
     super.dispose();
   }
 }

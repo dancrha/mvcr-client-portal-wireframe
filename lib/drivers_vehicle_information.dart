@@ -1509,25 +1509,52 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    RichText(
-                                      text: const TextSpan(
-                                        style: TextStyle(
-                                          fontFamily: 'ArchivoNarrow',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        ),
-                                        children: [
-                                          TextSpan(
-                                            text:
-                                                'Witness Phone Number or Email',
-                                          ),
-                                          TextSpan(
-                                            text: ' *',
-                                            style: TextStyle(color: Colors.red),
-                                          ),
-                                        ],
+                                    const Text(
+                                      style: TextStyle(
+                                        fontFamily: 'ArchivoNarrow',
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
                                       ),
+                                      'Witness Phone Number',
+                                    ),
+                                    const SizedBox(height: 10),
+                                    SizedBox(
+                                      width: 200,
+                                      child: Theme(
+                                        data: ThemeData(
+                                            fontFamily: 'ArchivoNarrow'),
+                                        child: TextFormField(
+                                          style:
+                                              const TextStyle(fontSize: 16.0),
+                                          cursorColor: const Color.fromRGBO(
+                                              0, 61, 121, 1),
+                                          decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color.fromRGBO(
+                                                    0, 61, 121, 1),
+                                                width: 2.0,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      style: TextStyle(
+                                        fontFamily: 'ArchivoNarrow',
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                      'Witness Email',
                                     ),
                                     const SizedBox(height: 10),
                                     SizedBox(

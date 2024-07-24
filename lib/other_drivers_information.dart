@@ -27,6 +27,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
   String? countryResidence;
   int _currentValue = 0; // You can set any default value
   bool _isButtonEnabled = true;
+  String? _anotherDriversInfo;
 
   bool vehicleDamage01 = false;
   bool vehicleDamage02 = false;
@@ -165,7 +166,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            "Other Driver's Information",
+                            "Other Driver 1 Information",
                             style: TextStyle(
                               fontFamily: 'ArchivoNarrow',
                               fontWeight: FontWeight.bold,
@@ -334,7 +335,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                               )
                             ],
                           ),
-                          SizedBox(height: isMobile ? 20 : 50),
+                          SizedBox(height: isMobile ? 20 : 40),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -807,7 +808,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                               ),
                             ],
                           ),
-                          SizedBox(height: isMobile ? 20 : 50),
+                          SizedBox(height: isMobile ? 20 : 40),
                           Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -1058,7 +1059,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                                           true, // Ensure the dropdown takes full width of its parent
                                     )),
                               ]),
-                          SizedBox(height: isMobile ? 20 : 50),
+                          SizedBox(height: isMobile ? 20 : 40),
                           Wrap(
                             spacing: 20,
                             runSpacing: 20,
@@ -1139,7 +1140,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                               ),
                             ],
                           ),
-                          SizedBox(height: isMobile ? 20 : 50),
+                          SizedBox(height: isMobile ? 20 : 40),
                           Wrap(
                             spacing: 20,
                             runSpacing: 20,
@@ -1257,7 +1258,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                               ),
                             ],
                           ),
-                          SizedBox(height: isMobile ? 20 : 50),
+                          SizedBox(height: isMobile ? 20 : 40),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -1386,7 +1387,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                               ),
                             ],
                           ),
-                          SizedBox(height: isMobile ? 20 : 50),
+                          SizedBox(height: isMobile ? 20 : 40),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -1482,6 +1483,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
+                                              hintText: 'e.g. ABCD1234',
                                               border: OutlineInputBorder(),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -1637,6 +1639,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
+                                              hintText: 'e.g. Toyota',
                                               border: OutlineInputBorder(),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -1691,6 +1694,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                                               cursorColor: const Color.fromRGBO(
                                                   0, 61, 121, 1),
                                               decoration: const InputDecoration(
+                                                hintText: 'e.g. Corolla',
                                                 border: OutlineInputBorder(),
                                                 focusedBorder:
                                                     OutlineInputBorder(
@@ -1739,6 +1743,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                                             cursorColor: const Color.fromRGBO(
                                                 0, 61, 121, 1),
                                             decoration: const InputDecoration(
+                                              hintText: 'e.g. 2014',
                                               border: OutlineInputBorder(),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -1793,6 +1798,7 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                                               cursorColor: const Color.fromRGBO(
                                                   0, 61, 121, 1),
                                               decoration: const InputDecoration(
+                                                hintText: 'e.g. White',
                                                 border: OutlineInputBorder(),
                                                 focusedBorder:
                                                     OutlineInputBorder(
@@ -2380,65 +2386,157 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                             ],
                           ),
                           const SizedBox(height: 40),
-                          Container(
-                            width: 270,
-                            height: 45,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
-                                  spreadRadius: 1,
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
+                          RichText(
+                            text: const TextSpan(
+                              style: TextStyle(
+                                fontFamily: 'ArchivoNarrow',
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text:
+                                      "Do you have another driver's information?",
+                                ),
+                                TextSpan(
+                                  text: ' *',
+                                  style: TextStyle(color: Colors.red),
                                 ),
                               ],
                             ),
-                            child: TextButton(
-                              onPressed: _isButtonEnabled
-                                  ? () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const Acknowledgement(),
-                                        ),
-                                      );
-                                    }
-                                  : null,
-                              style: TextButton.styleFrom(
-                                backgroundColor: _isButtonEnabled
-                                    ? const Color.fromRGBO(
-                                        0, 61, 121, 1) // Keep the blue color
-                                    : Colors.grey.withOpacity(0.5),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                padding: EdgeInsets.zero,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    Icons.add,
-                                    size: 22,
-                                    color: Colors.white,
+                          ),
+                          const SizedBox(height: 10),
+
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Theme(
+                                data: ThemeData(
+                                  unselectedWidgetColor: Colors.grey,
+                                  radioTheme: RadioThemeData(
+                                    fillColor:
+                                        MaterialStateProperty.resolveWith<
+                                            Color>((Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return Color.fromRGBO(0, 61, 121, 1);
+                                      }
+                                      return Colors.grey;
+                                    }),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      "Add Another Driver's Information",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 17.0,
-                                        fontFamily: 'ArchivoNarrow',
-                                      ),
-                                    ),
+                                ),
+                                child: Radio(
+                                  value: 'Yes',
+                                  groupValue: _anotherDriversInfo,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _anotherDriversInfo = value;
+                                      _validateInput();
+                                    });
+                                  },
+                                ),
+                              ),
+                              const Text('Yes'),
+                              const SizedBox(width: 20),
+                              Theme(
+                                data: ThemeData(
+                                  unselectedWidgetColor: Colors.grey,
+                                  radioTheme: RadioThemeData(
+                                    fillColor:
+                                        MaterialStateProperty.resolveWith<
+                                            Color>((Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return Color.fromRGBO(0, 61, 121, 1);
+                                      }
+                                      return Colors.grey;
+                                    }),
+                                  ),
+                                ),
+                                child: Radio(
+                                  value: 'No',
+                                  groupValue: _anotherDriversInfo,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _anotherDriversInfo = value;
+                                      _validateInput();
+                                    });
+                                  },
+                                ),
+                              ),
+                              const Text('No'),
+                            ],
+                          ),
+                          if (_anotherDriversInfo == 'Yes') ...{
+                            const SizedBox(height: 30),
+                            Container(
+                              width: 280,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 1,
+                                    blurRadius: 2,
+                                    offset: const Offset(0, 2),
                                   ),
                                 ],
                               ),
+                              child: TextButton(
+                                onPressed: _isButtonEnabled
+                                    ? () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const OtherDriversInformation(),
+                                          ),
+                                        );
+                                      }
+                                    : null,
+                                style: TextButton.styleFrom(
+                                  backgroundColor:
+                                      Color.fromARGB(255, 1, 64, 128),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  padding: EdgeInsets.zero,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(Icons.add,
+                                        size: 22, color: Colors.white),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        "Add Another Driver's Information",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 17.0,
+                                          fontFamily: 'ArchivoNarrow',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
+                          },
+
+                          // const SizedBox(height: 20),
+                          // const Text(
+                          //   style: TextStyle(
+                          //     fontFamily: 'ArchivoNarrow',
+                          //     fontSize: 16.0,
+                          //     //fontWeight: FontWeight.bold,
+                          //     color: Colors.black,
+                          //   ),
+                          //   'Would you like to add another driver’s information?',
+                          // ),
+
                           const SizedBox(height: 80),
                           Row(
                             children: [
