@@ -22,7 +22,7 @@ class _DriversStatementState extends State<DriversStatement> {
   String? otherDriversDocuments;
   int _currentValue = 0; // You can set any default value
   bool _isButtonEnabled = true;
-
+  String? _otherDriverInfo;
   @override
   void initState() {
     super.initState();
@@ -638,6 +638,88 @@ class _DriversStatementState extends State<DriversStatement> {
                               },
                             ],
                           ),
+                          const SizedBox(height: 40),
+                          RichText(
+                            text: const TextSpan(
+                              style: TextStyle(
+                                fontFamily: 'ArchivoNarrow',
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              children: [
+                                TextSpan(
+                                  text:
+                                      "Do you have the other driver's information?",
+                                ),
+                                TextSpan(
+                                  text: ' *',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Theme(
+                                data: ThemeData(
+                                  unselectedWidgetColor: Colors.grey,
+                                  radioTheme: RadioThemeData(
+                                    fillColor:
+                                        MaterialStateProperty.resolveWith<
+                                            Color>((Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return Color.fromRGBO(0, 61, 121, 1);
+                                      }
+                                      return Colors.grey;
+                                    }),
+                                  ),
+                                ),
+                                child: Radio(
+                                  value: 'Yes',
+                                  groupValue: _otherDriverInfo,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _otherDriverInfo = value;
+                                      _validateInput();
+                                    });
+                                  },
+                                ),
+                              ),
+                              const Text('Yes'),
+                              const SizedBox(width: 20),
+                              Theme(
+                                data: ThemeData(
+                                  unselectedWidgetColor: Colors.grey,
+                                  radioTheme: RadioThemeData(
+                                    fillColor:
+                                        MaterialStateProperty.resolveWith<
+                                            Color>((Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return Color.fromRGBO(0, 61, 121, 1);
+                                      }
+                                      return Colors.grey;
+                                    }),
+                                  ),
+                                ),
+                                child: Radio(
+                                  value: 'No',
+                                  groupValue: _otherDriverInfo,
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _otherDriverInfo = value;
+                                      _validateInput();
+                                    });
+                                  },
+                                ),
+                              ),
+                              const Text('No'),
+                            ],
+                          ),
                           const SizedBox(height: 80),
                           Row(
                             children: [
@@ -723,7 +805,9 @@ class _DriversStatementState extends State<DriversStatement> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  const OtherDriversInformation(),
+                                                  _otherDriverInfo == 'Yes'
+                                                      ? const OtherDriversInformation()
+                                                      : const Acknowledgement(),
                                             ),
                                           );
                                         }

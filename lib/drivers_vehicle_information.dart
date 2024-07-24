@@ -1519,7 +1519,8 @@ class _DriversVehicleInformationState extends State<DriversVehicleInformation> {
                                         ),
                                         children: [
                                           TextSpan(
-                                            text: 'Witness Phone Number',
+                                            text:
+                                                'Witness Phone Number or Email',
                                           ),
                                           TextSpan(
                                             text: ' *',

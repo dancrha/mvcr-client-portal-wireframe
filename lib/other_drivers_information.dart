@@ -2379,6 +2379,66 @@ class _OtherDriversInformationState extends State<OtherDriversInformation> {
                               ),
                             ],
                           ),
+                          const SizedBox(height: 40),
+                          Container(
+                            width: 270,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(40.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: TextButton(
+                              onPressed: _isButtonEnabled
+                                  ? () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Acknowledgement(),
+                                        ),
+                                      );
+                                    }
+                                  : null,
+                              style: TextButton.styleFrom(
+                                backgroundColor: _isButtonEnabled
+                                    ? const Color.fromRGBO(
+                                        0, 61, 121, 1) // Keep the blue color
+                                    : Colors.grey.withOpacity(0.5),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                padding: EdgeInsets.zero,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(
+                                    Icons.add,
+                                    size: 22,
+                                    color: Colors.white,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      "Add Another Driver's Information",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17.0,
+                                        fontFamily: 'ArchivoNarrow',
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                           const SizedBox(height: 80),
                           Row(
                             children: [
